@@ -9,29 +9,37 @@ import type { Car } from '@/lib/types';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Skeleton } from '@/components/ui/skeleton'; // For loading state
 
+// Default fallback values if no car data is available or prices are outside a typical range.
+const FALLBACK_MIN_PRICE = 100000; // INR, e.g. 1 Lakh
+const FALLBACK_MAX_PRICE = 5000000; // INR, e.g. 50 Lakhs
+
 export default function GalleryPage() {
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [pageMinPrice, setPageMinPrice] = useState(500000); // Updated min price to 5,00,000 INR
-  const [pageMaxPrice, setPageMaxPrice] = useState(50000000); // Updated max price to 5,00,00,000 INR
+  
+  // State for the slider's min/max bounds. These will be determined by car data.
+  const [sliderMinBound, setSliderMinBound] = useState(FALLBACK_MIN_PRICE);
+  const [sliderMaxBound, setSliderMaxBound] = useState(FALLBACK_MAX_PRICE);
 
-  // Simulate API call / data loading
   useEffect(() => {
-    // In a real app, you'd fetch this data
+    setIsLoading(true);
+    // Simulate API call / data loading
     setTimeout(() => {
-      setFilteredCars(allCarsData);
-      // Update min/max based on actual data if needed, but keep defaults if data is outside this new range or empty.
+      setFilteredCars(allCarsData); // Initialize with all cars
+
       if (allCarsData.length > 0) {
         const prices = allCarsData.map(car => car.price);
-        // Ensure the pageMinPrice and pageMaxPrice reflect the new default range,
-        // but can also adapt if the actual car data has an even wider range.
-        // For now, we'll stick to the fixed new defaults for the filter.
-        // setPageMinPrice(Math.min(...prices, 500000));
-        // setPageMaxPrice(Math.max(...prices, 50000000));
+        const dataMinPrice = Math.min(...prices);
+        const dataMaxPrice = Math.max(...prices);
+        
+        // Set slider bounds based on actual car prices.
+        // Ensure dataMinPrice is not less than 0, though prices should be positive.
+        setSliderMinBound(dataMinPrice > 0 ? dataMinPrice : FALLBACK_MIN_PRICE);
+        setSliderMaxBound(dataMaxPrice > dataMinPrice ? dataMaxPrice : FALLBACK_MAX_PRICE);
       } else {
-        // If no car data, stick to the new defaults.
-        setPageMinPrice(500000);
-        setPageMaxPrice(50000000);
+        // If no car data, use fallback default bounds.
+        setSliderMinBound(FALLBACK_MIN_PRICE);
+        setSliderMaxBound(FALLBACK_MAX_PRICE);
       }
       setIsLoading(false);
     }, 500); // Simulate network delay
@@ -54,16 +62,16 @@ export default function GalleryPage() {
         subtitle="Explore our wide selection of vehicles. Use the filters below to find your perfect car."
       />
       
-      {!isLoading ? (
+      {isLoading ? ( // Show skeleton for form while bounds are being determined
+        <CardSkeleton />
+      ) : (
         <AdvancedSearchForm
           allCars={allCarsData}
           onSearch={handleSearch}
           uniqueMakes={uniqueMakes}
-          minPrice={pageMinPrice} // Use state variable
-          maxPrice={pageMaxPrice} // Use state variable
+          minPrice={sliderMinBound} // Pass dynamic min bound for the slider
+          maxPrice={sliderMaxBound} // Pass dynamic max bound for the slider
         />
-      ) : (
-        <CardSkeleton />
       )}
 
       {isLoading ? (
@@ -114,3 +122,4 @@ function CarListSkeleton() {
     </div>
   );
 }
+
