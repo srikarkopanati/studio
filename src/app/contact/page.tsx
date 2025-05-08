@@ -29,10 +29,10 @@ export default function ContactPage() {
         subtitle="We're here to help and answer any question you might have. We look forward to hearing from you!"
       />
 
-      <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-stretch"> {/* Changed items-start to items-stretch */}
+      <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-stretch">
         {/* Contact Information Column */}
-        <div className="md:col-span-5 lg:col-span-4 flex flex-col"> {/* Added flex flex-col */}
-          <Card className="shadow-xl bg-card border border-border rounded-xl overflow-hidden flex-grow flex flex-col h-full"> {/* Added flex-grow and h-full */}
+        <div className="md:col-span-5 lg:col-span-4 flex flex-col">
+          <Card className="shadow-xl bg-card border border-border rounded-xl overflow-hidden flex-grow flex flex-col h-full">
             <CardHeader className="bg-primary text-primary-foreground p-6">
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
                 <Building className="w-7 h-7" />
@@ -42,7 +42,7 @@ export default function ContactPage() {
                 Reach out or visit us.
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6 space-y-5 flex-grow"> {/* Added flex-grow */}
+            <CardContent className="p-6 space-y-5 flex-grow">
               <div className="flex items-center gap-4">
                 <User className="w-6 h-6 text-accent flex-shrink-0" />
                 <div>
@@ -86,7 +86,7 @@ export default function ContactPage() {
           </Card>
 
           {socialLinks.length > 0 && (
-             <Card className="shadow-xl bg-card border border-border rounded-xl mt-8"> {/* Added mt-8 for spacing if social links exist */}
+             <Card className="shadow-xl bg-card border border-border rounded-xl mt-8">
                 <CardHeader>
                     <CardTitle className="text-xl font-semibold text-primary">Connect With Us</CardTitle>
                 </CardHeader>
@@ -104,15 +104,15 @@ export default function ContactPage() {
         </div>
 
         {/* Map/Image Column */}
-        <div className="md:col-span-7 lg:col-span-8 flex flex-col"> {/* Added flex flex-col */}
-          <Card className="shadow-xl overflow-hidden bg-card border border-border rounded-xl flex-grow flex flex-col h-full"> {/* Added flex-grow and h-full */}
+        <div className="md:col-span-7 lg:col-span-8 flex flex-col">
+          <Card className="shadow-xl overflow-hidden bg-card border border-border rounded-xl flex-grow flex flex-col h-full">
             <div className="relative w-full h-72 md:h-96 lg:h-[450px] bg-muted">
               <Image
-                src="https://picsum.photos/seed/garage-showroom-exterior/1200/800"
+                src="https://picsum.photos/seed/dealership-map/1200/800"
                 alt="The Wheels Garage Showroom Location"
                 fill
                 style={{ objectFit: 'cover' }}
-                data-ai-hint="car showroom exterior"
+                data-ai-hint="car dealership map"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 60vw, 700px"
                 priority
                 className="rounded-t-xl"
@@ -129,8 +129,8 @@ export default function ContactPage() {
                     </div>
                   </div>
                   <Separator className="my-6" />
-               </div>
-              <Button asChild size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base py-3 px-8 shadow-md mt-auto"> {/* Added mt-auto */}
+              </div>
+              <Button asChild size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base py-3 px-8 shadow-md mt-auto">
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.addressLine1 + ", " + contactDetails.addressLine2 + " " + contactDetails.addressLine3)}`}
                   target="_blank"
