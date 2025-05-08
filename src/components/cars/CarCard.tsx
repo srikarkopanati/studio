@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge'; 
-import { DollarSign, Gauge, Settings, Fuel } from 'lucide-react'; 
+import { Gauge, Settings, Fuel } from 'lucide-react'; 
 import Link from 'next/link';
 
 interface CarCardProps {
@@ -45,8 +45,8 @@ export function CarCard({ car }: CarCardProps) {
         
         <div className="space-y-2 text-sm text-foreground">
           <div className="flex items-center gap-2">
-            <DollarSign className="w-4 h-4 text-accent" />
-            <span>Price: ₹{car.price.toLocaleString('en-IN')}</span>
+            <span className="font-semibold text-accent text-lg">₹</span>
+            <span>{car.price.toLocaleString('en-IN')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Gauge className="w-4 h-4 text-accent" />
@@ -63,7 +63,7 @@ export function CarCard({ car }: CarCardProps) {
         </div>
         <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{car.description}</p>
       </CardContent>
-      <CardFooter className="border-t border-border mt-auto bg-muted/30 p-4"> {/* Changed padding to p-4 for consistent spacing */}
+      <CardFooter className="border-t border-border mt-auto bg-muted/30 p-4">
         <Link href={`/car/${car.id}`} passHref className="w-full">
           <Button variant="default" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
             View Details
@@ -73,4 +73,3 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
-
