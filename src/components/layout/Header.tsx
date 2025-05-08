@@ -13,6 +13,7 @@ const navItems = [
   { href: '/', label: 'Home' },
   { href: '/gallery', label: 'Car Gallery' },
   { href: '/ai-finder', label: 'AI Car Finder' },
+  { href: '/contact', label: 'Contact Us' },
 ];
 
 export function Header() {
@@ -66,6 +67,7 @@ export function Header() {
                         "text-lg font-medium transition-colors hover:text-primary",
                         pathname === item.href ? "text-primary" : "text-foreground"
                       )}
+                      onClick={() => setIsMobileMenuOpen(false)}
                     >
                       {item.label}
                     </Link>
