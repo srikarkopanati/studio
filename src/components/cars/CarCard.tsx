@@ -3,7 +3,8 @@ import type { Car } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { DollarSign, Gauge, Settings, Fuel } from 'lucide-react'; 
+import { Badge } from '@/components/ui/badge'; // Import Badge
+import { DollarSign, Gauge, Settings, Fuel, CheckSquare } from 'lucide-react'; 
 import Link from 'next/link';
 
 interface CarCardProps {
@@ -11,28 +12,30 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  // Using Picsum for reliable placeholder images. Added car.id to query string for variety.
-  const imageSrc = `https://picsum.photos/600/400?random=${car.id}`;
-  // data-ai-hint uses the car model, which is 1-2 keywords as per guidelines.
-  const imageSearchHint = car.model;
-
+  const imageSearchHint = `${car.make} ${car.model}`;
 
   return (
-    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card">
-      <CardHeader className="p-0">
+    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card border border-border rounded-xl">
+      <CardHeader className="p-0 relative">
         <div className="relative w-full h-56">
           <Image
-            src={imageSrc}
+            src={car.imageUrl || `https://picsum.photos/seed/${car.id}/600/400`}
             alt={`Image of ${car.make} ${car.model}`}
             fill
             style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105 bg-muted"
             data-ai-hint={imageSearchHint} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-            priority={false} // Keep false for gallery items
+            priority={false} 
             key={`${car.id}-card-image`} 
           />
         </div>
+        <Badge 
+          variant={car.condition === 'new' ? 'default' : 'secondary'} 
+          className={`absolute top-3 right-3 text-xs px-2 py-1 ${car.condition === 'new' ? 'bg-accent text-accent-foreground' : 'bg-secondary text-secondary-foreground'}`}
+        >
+          {car.condition === 'new' ? 'New' : 'Used'}
+        </Badge>
       </CardHeader>
       <CardContent className="p-6 flex-grow">
         <CardTitle className="text-2xl font-bold text-primary mb-1">
@@ -60,9 +63,9 @@ export function CarCard({ car }: CarCardProps) {
         </div>
         <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{car.description}</p>
       </CardContent>
-      <CardFooter className="p-6 pt-0">
+      <CardFooter className="p-6 pt-0 border-t border-border mt-auto">
         <Link href={`/car/${car.id}`} passHref className="w-full">
-          <Button variant="default" className="w-full bg-primary hover:bg-primary/90">
+          <Button variant="default" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
             View Details
           </Button>
         </Link>
@@ -70,4 +73,3 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
-

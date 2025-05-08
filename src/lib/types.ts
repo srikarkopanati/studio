@@ -11,6 +11,7 @@ export interface Car {
   mileage: number; // Mileage in KMs (total distance driven)
   engineType: string;
   fuelType: string;
+  condition: 'new' | 'used'; // Added car condition
 }
 
 // For AI Car Finder form
@@ -24,7 +25,6 @@ export const budgetOptions = [
 ];
 
 export const familySizeOptions = [
-  // { value: "1-2 people", label: "1-2 people (Single/Couple)" }, // Removed as per request
   { value: "3-4 people", label: "3-4 people (Small Family)" },
   { value: "5+ people", label: "5+ people (Large Family)" },
 ];
@@ -44,4 +44,10 @@ export const mileagePreferenceOptions = [
   { value: "10-15 kmpl (Moderate)", label: "10-15 kmpl (Moderate)" },
   { value: "Below 10 kmpl (Performance Focus)", label: "Below 10 kmpl (Performance Focus)" },
   { value: "not a primary concern", label: "Not a primary concern" },
+];
+
+// For Advanced Search Form
+export const carConditionOptions = [
+  { value: "new", label: "New Cars" },
+  { value: "used", label: "Used Cars" },
 ];

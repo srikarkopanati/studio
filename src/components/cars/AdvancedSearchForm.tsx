@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from 'react';
@@ -10,8 +11,9 @@ import { Label } from '@/components/ui/label';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Filter, Search, RotateCcw } from 'lucide-react';
+import { Filter, Search, RotateCcw, CarIcon } from 'lucide-react'; // Added CarIcon
 import type { Car } from '@/lib/types';
+import { carConditionOptions } from '@/lib/types'; // Import condition options
 
 const searchSchema = z.object({
   make: z.string().optional(),
@@ -19,6 +21,7 @@ const searchSchema = z.object({
   minYear: z.string().optional().refine(val => !val || /^\d{4}$/.test(val), { message: "Invalid year"}),
   maxYear: z.string().optional().refine(val => !val || /^\d{4}$/.test(val), { message: "Invalid year"}),
   priceRange: z.array(z.number()).optional(), // INR
+  condition: z.string().optional(), // Added car condition
 });
 
 type SearchFormData = z.infer<typeof searchSchema>;
@@ -27,12 +30,13 @@ interface AdvancedSearchFormProps {
   allCars: Car[];
   onSearch: (filteredCars: Car[]) => void;
   uniqueMakes: string[];
-  minPrice: number; // Expected in INR, e.g., 500000
-  maxPrice: number; // Expected in INR, e.g., 50000000
+  minPrice: number; 
+  maxPrice: number; 
 }
 
 const currentYear = new Date().getFullYear();
 const ANY_MAKE_VALUE = "_ANY_MAKE_"; 
+const ANY_CONDITION_VALUE = "_ANY_CONDITION_"; // For "Any Condition"
 
 export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, maxPrice }: AdvancedSearchFormProps) {
   
@@ -43,7 +47,8 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       model: '',
       minYear: '',
       maxYear: '',
-      priceRange: [minPrice, maxPrice], // Initialize with props
+      priceRange: [minPrice, maxPrice],
+      condition: ANY_CONDITION_VALUE, // Default to "Any Condition"
     },
   });
 
@@ -65,6 +70,9 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
     if (data.priceRange) {
       filtered = filtered.filter(car => car.price >= data.priceRange![0] && car.price <= data.priceRange![1]);
     }
+    if (data.condition && data.condition !== ANY_CONDITION_VALUE) {
+      filtered = filtered.filter(car => car.condition === data.condition);
+    }
     onSearch(filtered);
   };
 
@@ -74,7 +82,8 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       model: '',
       minYear: '',
       maxYear: '',
-      priceRange: [minPrice, maxPrice], // Reset to current prop values
+      priceRange: [minPrice, maxPrice],
+      condition: ANY_CONDITION_VALUE,
     });
     onSearch(allCars); 
   };
@@ -82,26 +91,26 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
   const currentPriceRange = watch("priceRange") || [minPrice, maxPrice];
 
   return (
-    <Card className="shadow-lg mb-12 bg-card">
-      <CardHeader>
+    <Card className="shadow-lg mb-12 bg-card border border-border rounded-xl">
+      <CardHeader className="border-b border-border">
         <CardTitle className="text-2xl font-semibold text-primary flex items-center gap-2">
           <Filter className="w-6 h-6" />
           Advanced Search
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <CardContent className="p-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 items-end">
           <div className="space-y-2">
-            <Label htmlFor="make-select">Make</Label>
+            <Label htmlFor="make-select" className="font-medium">Make</Label>
             <Controller
               name="make"
               control={control}
               render={({ field }) => (
                 <Select
-                  onValueChange={(value) => field.onChange(value)}
+                  onValueChange={(value) => field.onChange(value === ANY_MAKE_VALUE ? "" : value)}
                   value={field.value || ANY_MAKE_VALUE}
                 >
-                  <SelectTrigger id="make-select" className="w-full">
+                  <SelectTrigger id="make-select" className="w-full bg-input border-border focus:ring-primary">
                     <SelectValue placeholder="Any Make" />
                   </SelectTrigger>
                   <SelectContent>
@@ -116,24 +125,48 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="model">Model</Label>
-            <Input id="model" placeholder="e.g. Camry, CR-V" {...register('model')} />
+            <Label htmlFor="model" className="font-medium">Model</Label>
+            <Input id="model" placeholder="e.g. Swift, Creta" {...register('model')} className="bg-input border-border focus:ring-primary" />
           </div>
           
+           <div className="space-y-2">
+            <Label htmlFor="condition-select" className="font-medium">Condition</Label>
+            <Controller
+              name="condition"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  onValueChange={(value) => field.onChange(value === ANY_CONDITION_VALUE ? "" : value)}
+                  value={field.value || ANY_CONDITION_VALUE}
+                >
+                  <SelectTrigger id="condition-select" className="w-full bg-input border-border focus:ring-primary">
+                    <SelectValue placeholder="Any Condition" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={ANY_CONDITION_VALUE}>Any Condition</SelectItem>
+                    {carConditionOptions.map(option => (
+                      <SelectItem key={option.value} value={option.value}>{option.label}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
+          </div>
+
           <div className="space-y-2">
-            <Label htmlFor="minYear">Min Year</Label>
-            <Input id="minYear" type="number" placeholder="e.g. 2018" {...register('minYear')} min="1980" max={currentYear} />
+            <Label htmlFor="minYear" className="font-medium">Min Year</Label>
+            <Input id="minYear" type="number" placeholder="e.g. 2018" {...register('minYear')} min="1980" max={currentYear} className="bg-input border-border focus:ring-primary" />
             {errors.minYear && <p className="text-sm text-destructive">{errors.minYear.message}</p>}
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="maxYear">Max Year</Label>
-            <Input id="maxYear" type="number" placeholder="e.g. 2023" {...register('maxYear')} min="1980" max={currentYear} />
+            <Label htmlFor="maxYear" className="font-medium">Max Year</Label>
+            <Input id="maxYear" type="number" placeholder="e.g. 2023" {...register('maxYear')} min="1980" max={currentYear} className="bg-input border-border focus:ring-primary" />
             {errors.maxYear && <p className="text-sm text-destructive">{errors.maxYear.message}</p>}
           </div>
           
-          <div className="space-y-2 md:col-span-2 lg:col-span-1">
-            <Label>Price Range (₹)</Label>
+          <div className="space-y-2 md:col-span-2 lg:col-span-3"> {/* Made price range full width on all sizes for better layout */}
+            <Label className="font-medium">Price Range (₹)</Label>
             <Controller
               name="priceRange"
               control={control}
@@ -142,11 +175,11 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
                   <Slider
                     value={field.value}
                     onValueChange={field.onChange}
-                    min={minPrice} // Use prop
-                    max={maxPrice} // Use prop
-                    step={50000} // Step for INR, e.g., 50k
-                    minStepsBetweenThumbs={0} // Allow thumbs to be at the same value
-                    className="my-4"
+                    min={minPrice} 
+                    max={maxPrice} 
+                    step={50000} 
+                    minStepsBetweenThumbs={0}
+                    className="my-4 [&>span:nth-child(1)>span]:bg-primary [&>span:nth-child(2)>span]:bg-primary [&>span:nth-child(3)>span]:bg-accent" // Target thumbs with accent
                   />
                   <div className="text-sm text-muted-foreground flex justify-between">
                     <span>₹{currentPriceRange[0].toLocaleString('en-IN')}</span>
@@ -158,10 +191,10 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
           </div>
 
           <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row gap-4 pt-4">
-            <Button type="submit" className="w-full sm:w-auto bg-primary hover:bg-primary/90 flex-grow">
+            <Button type="submit" className="w-full sm:w-auto bg-primary hover:bg-primary/90 flex-grow text-primary-foreground">
               <Search className="mr-2 h-4 w-4" /> Search Cars
             </Button>
-            <Button type="button" variant="outline" onClick={handleReset} className="w-full sm:w-auto flex-grow">
+            <Button type="button" variant="outline" onClick={handleReset} className="w-full sm:w-auto flex-grow border-primary text-primary hover:bg-primary/5">
               <RotateCcw className="mr-2 h-4 w-4" /> Reset Filters
             </Button>
           </div>

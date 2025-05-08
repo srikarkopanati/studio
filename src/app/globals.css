@@ -4,77 +4,98 @@
 
 @layer base {
   :root {
-    --background: 210 17% 98%; /* #F8F9FA - Very Light Gray */
-    --foreground: 210 10% 15%; /* #212529 - Dark Gray */
-    --card: 0 0% 100%; /* #FFFFFF - White */
-    --card-foreground: 210 10% 15%; /* #212529 - Dark Gray */
-    --popover: 0 0% 100%; /* #FFFFFF - White */
-    --popover-foreground: 210 10% 15%; /* #212529 - Dark Gray */
-    --primary: 210 100% 20%; /* #003366 - Classic Navy Blue */
-    --primary-foreground: 0 0% 100%; /* #FFFFFF - White */
-    --secondary: 210 25% 91%; /* #E0E8F0 - Light Blue-Gray */
-    --secondary-foreground: 210 100% 20%; /* #003366 - Navy Blue for text on secondary */
-    --muted: 210 13% 65%; /* #ADB5BD - Gray */
-    --muted-foreground: 210 10% 40%; /* #60686F - Darker Gray */
-    --accent: 34 100% 65%; /* #FFB74D - Amber */
-    --accent-foreground: 210 10% 15%; /* #212529 - Dark Gray for text on accent */
-    --destructive: 354 70% 54%; /* #DC3545 - Standard Red */
-    --destructive-foreground: 0 0% 98%; /* #FAFAFA - Light Gray/White */
-    --border: 210 17% 90%; /* #DEE2E6 - Light Gray */
-    --input: 210 17% 90%; /* #DEE2E6 - Light Gray */
-    --ring: 34 100% 65%; /* #FFB74D - Amber (for focus rings) */
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
-    --radius: 0.5rem;
-    /* Default sidebar colors, can be adjusted if a persistent sidebar is used */
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Light Theme - Inspired by luxury automotive brands: Sophisticated, Clean, Premium */
+    --background: 0 0% 97%; /* #F7F7F7 - Off-white, very light gray for a clean, spacious feel */
+    --foreground: 220 15% 25%; /* #3A4150 - Dark Slate Blue/Gray for text, sophisticated and readable */
+    
+    --card: 0 0% 100%; /* #FFFFFF - Pure White for cards, creating contrast and highlighting content */
+    --card-foreground: 220 15% 25%; /* #3A4150 - Consistent with main foreground */
+    
+    --popover: 0 0% 100%; /* #FFFFFF - Pure White for popovers */
+    --popover-foreground: 220 15% 25%; /* #3A4150 - Consistent with main foreground */
+    
+    --primary: 210 70% 45%; /* #4A90E2 - A refined, confident Blue, less saturated than typical primary */
+    --primary-foreground: 0 0% 100%; /* #FFFFFF - White text on primary for high contrast */
+    
+    --secondary: 215 30% 92%; /* #E8ECF0 - Light, cool Gray-Blue, for subtle backgrounds or elements */
+    --secondary-foreground: 210 70% 45%; /* #4A90E2 - Primary color for text on secondary, ensuring visibility */
+    
+    --muted: 220 10% 75%; /* #B8BEC9 - Soft Gray for less important text or subtle dividers */
+    --muted-foreground: 220 10% 50%; /* #788190 - Darker Muted Gray for subdued text */
+    
+    --accent: 30 90% 60%; /* #FFB347 - Warm, inviting Orange/Amber for CTAs and highlights, stands out elegantly */
+    --accent-foreground: 220 15% 25%; /* #3A4150 - Dark text on accent for readability */
+    
+    --destructive: 0 70% 55%; /* #E64A4A - Clear, noticeable Red for warnings, not overly aggressive */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF - White text on destructive */
+    
+    --border: 215 20% 85%; /* #D1D8DE - Subtle Gray border, harmonizes with light theme */
+    --input: 215 20% 90%; /* #E1E6EB - Light Gray for input backgrounds, clean and modern */
+    --ring: 210 70% 45%; /* #4A90E2 - Primary color for focus rings, consistent branding */
+
+    --chart-1: 210 70% 55%; /* Brighter primary blue */
+    --chart-2: 30 90% 65%;  /* Brighter accent orange */
+    --chart-3: 180 40% 50%; /* Teal/Aqua */
+    --chart-4: 270 50% 60%; /* Purple/Lavender */
+    --chart-5: 0 0% 50%;    /* Medium Gray */
+    --radius: 0.75rem; /* Slightly larger radius for a softer, modern look */
+
+    /* Sidebar colors light - consistent with main theme */
+    --sidebar-background: 0 0% 98%; /* Slightly off-white */
+    --sidebar-foreground: 220 15% 28%;
+    --sidebar-primary: 210 70% 40%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 215 30% 90%;
+    --sidebar-accent-foreground: 210 70% 40%;
+    --sidebar-border: 215 20% 88%;
+    --sidebar-ring: 210 70% 45%;
   }
 
   .dark {
-    --background: 213 27% 10%; /* #121820 - Very Dark Blue/Black */
-    --foreground: 210 17% 93%; /* #E9ECEF - Light Gray */
-    --card: 220 25% 13%; /* #1A202C - Darker Blue/Gray */
-    --card-foreground: 210 17% 93%; /* #E9ECEF - Light Gray */
-    --popover: 220 25% 13%; /* #1A202C - Darker Blue/Gray */
-    --popover-foreground: 210 17% 93%; /* #E9ECEF - Light Gray */
-    --primary: 34 100% 65%; /* #FFB74D - Amber (becomes primary in dark mode) */
-    --primary-foreground: 213 27% 10%; /* #121820 - Dark text for amber buttons */
-    --secondary: 220 18% 23%; /* #2D3748 - Dark Slate Gray */
-    --secondary-foreground: 210 17% 85%; /* #D1D8DE - Lighter Gray for text on secondary */
-    --muted: 220 13% 35%; /* #4A5568 - Darker Gray */
-    --muted-foreground: 210 15% 65%; /* #9AA5B4 - Lighter Gray */
-    --accent: 217 91% 67%; /* #60A5FA - Bright Blue */
-    --accent-foreground: 213 27% 10%; /* #121820 - Dark text for bright blue accent */
-    --destructive: 0 72% 56%; /* #E53E3E - Brighter Red */
-    --destructive-foreground: 0 0% 98%; /* #FAFAFA - Light Gray/White */
-    --border: 222 14% 27%; /* #3A4150 - Subtle Dark Border */
-    --input: 222 14% 27%; /* #3A4150 - Subtle Dark Border */
-    --ring: 217 91% 67%; /* #60A5FA - Bright Blue (for focus rings) */
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    /* Dark Theme - Inspired by luxury automotive night drives: Sleek, Modern, Focused */
+    --background: 225 15% 12%; /* #1A1D24 - Very Dark Blue/Charcoal, deep and immersive */
+    --foreground: 210 20% 88%; /* #DCE1E9 - Light Gray/Off-white for text, crisp and clear */
+
+    --card: 225 12% 18%; /* #262A33 - Dark Gray-Blue for cards, subtle depth */
+    --card-foreground: 210 20% 88%; /* #DCE1E9 - Consistent with main foreground */
+
+    --popover: 225 12% 18%; /* #262A33 - Dark Gray-Blue for popovers */
+    --popover-foreground: 210 20% 88%; /* #DCE1E9 - Consistent with main foreground */
+
+    --primary: 30 90% 60%; /* #FFB347 - Warm Amber becomes primary accent, vibrant against dark */
+    --primary-foreground: 225 15% 12%; /* #1A1D24 - Dark text for high contrast on amber buttons */
+
+    --secondary: 225 10% 25%; /* #363A45 - Darker Slate, for secondary elements */
+    --secondary-foreground: 210 20% 80%; /* #C8CED8 - Lighter gray for text on dark secondary */
+
+    --muted: 225 8% 40%; /* #5C616E - Muted Dark Gray for less prominent info */
+    --muted-foreground: 210 15% 65%; /* #9AA5B4 - Lighter Muted Gray for text */
+
+    --accent: 200 80% 60%; /* #4DC3FF - Electric Blue / Cyan, for highlights and modern feel */
+    --accent-foreground: 225 15% 12%; /* #1A1D24 - Dark text on electric blue accent */
+
+    --destructive: 0 75% 60%; /* #F25252 - Bright, clear Red for destructive actions */
+    --destructive-foreground: 0 0% 100%; /* #FFFFFF - White text on destructive */
+
+    --border: 225 10% 22%; /* #2F333D - Subtle Dark Border, defines elements without harshness */
+    --input: 225 10% 22%; /* #2F333D - Dark input backgrounds */
+    --ring: 30 90% 60%; /* #FFB347 - Amber for focus rings, consistent with primary accent */
     
-    /* Dark mode sidebar, can be adjusted if a persistent sidebar is used */
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --chart-1: 30 90% 65%; /* Brighter accent orange */
+    --chart-2: 200 80% 65%; /* Brighter electric blue */
+    --chart-3: 150 50% 55%; /* Seafoam Green */
+    --chart-4: 300 50% 65%; /* Magenta/Pink */
+    --chart-5: 0 0% 70%;    /* Light Gray */
+
+    /* Sidebar colors dark - consistent with main dark theme */
+    --sidebar-background: 225 15% 10%; /* Even darker for sidebar */
+    --sidebar-foreground: 210 20% 90%;
+    --sidebar-primary: 30 90% 55%;
+    --sidebar-primary-foreground: 225 15% 10%;
+    --sidebar-accent: 225 12% 15%;
+    --sidebar-accent-foreground: 30 90% 55%;
+    --sidebar-border: 225 10% 18%;
+    --sidebar-ring: 30 90% 60%;
   }
 }
 
