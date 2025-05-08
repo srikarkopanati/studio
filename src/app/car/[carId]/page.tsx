@@ -40,7 +40,12 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     );
   }
 
-  const mainImageSearchHint = `${car.make} ${car.model}`;
+  // Generate a concise AI hint, prioritizing model name, then make and model if short enough.
+  let mainImageSearchHint = car.model;
+  if (`${car.make} ${car.model}`.split(' ').length <= 2) {
+    mainImageSearchHint = `${car.make} ${car.model}`;
+  }
+
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -71,7 +76,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
               fill
               style={{ objectFit: 'cover' }}
               className="bg-muted"
-              data-ai-hint={mainImageSearchHint} 
+              data-ai-hint={mainImageSearchHint.toLowerCase()} 
               priority 
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               key={`${car.id}-details-image`}

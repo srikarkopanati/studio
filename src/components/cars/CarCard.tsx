@@ -3,8 +3,8 @@ import type { Car } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge'; // Import Badge
-import { DollarSign, Gauge, Settings, Fuel, CheckSquare } from 'lucide-react'; 
+import { Badge } from '@/components/ui/badge'; 
+import { DollarSign, Gauge, Settings, Fuel } from 'lucide-react'; 
 import Link from 'next/link';
 
 interface CarCardProps {
@@ -12,7 +12,12 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const imageSearchHint = `${car.make} ${car.model}`;
+  // Generate a concise AI hint, prioritizing model name, then make and model if short enough.
+  let imageSearchHint = car.model;
+  if (`${car.make} ${car.model}`.split(' ').length <= 2) {
+    imageSearchHint = `${car.make} ${car.model}`;
+  }
+
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card border border-border rounded-xl">
@@ -24,7 +29,7 @@ export function CarCard({ car }: CarCardProps) {
             fill
             style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105 bg-muted"
-            data-ai-hint={imageSearchHint} 
+            data-ai-hint={imageSearchHint.toLowerCase()} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
             priority={false} 
             key={`${car.id}-card-image`} 
