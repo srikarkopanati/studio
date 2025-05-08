@@ -8,19 +8,20 @@ interface HeroSectionProps {
   title: string;
   subtitle?: string;
   imageUrl?: string;
+  imageHint?: string; // Added for data-ai-hint
   ctaText?: string;
   ctaLink?: string;
   children?: ReactNode;
 }
 
-export function HeroSection({ title, subtitle, imageUrl, ctaText, ctaLink, children }: HeroSectionProps) {
+export function HeroSection({ title, subtitle, imageUrl, imageHint, ctaText, ctaLink, children }: HeroSectionProps) {
   return (
     <section className="relative bg-gradient-to-r from-primary to-blue-700 text-primary-foreground py-20 md:py-32 overflow-hidden">
       {imageUrl && (
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${imageUrl})` }}
-          data-ai-hint="abstract car"
+          data-ai-hint={imageHint || "abstract car"}
         />
       )}
       <div className="container relative z-10 mx-auto px-4 text-center">

@@ -11,12 +11,10 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  // car.imageUrl is the search hint, e.g., "Maruti Suzuki Swift"
-  const imageSearchHint = car.imageUrl; 
-  // Use picsum.photos with a unique seed for each car to get varied images.
-  // Combining car.id with the hint ensures more uniqueness if hints are similar.
-  const imageSeed = `${encodeURIComponent(car.id)}-${encodeURIComponent(imageSearchHint)}`;
-  const imageSrc = `https://picsum.photos/seed/${imageSeed}/600/400`;
+  // Use unsplash to find images based on make and model
+  const searchTerm = `${car.make} ${car.model}`;
+  const imageSrc = `https://source.unsplash.com/featured/?${encodeURIComponent(searchTerm)}&w=600&h=400`;
+  const imageSearchHint = `${car.make} ${car.model}`;
 
 
   return (
@@ -32,7 +30,7 @@ export function CarCard({ car }: CarCardProps) {
             data-ai-hint={imageSearchHint} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
             priority={false}
-            key={car.id} 
+            key={`${car.id}-card-image`} // Unique key for image
           />
         </div>
       </CardHeader>
@@ -72,3 +70,4 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
+

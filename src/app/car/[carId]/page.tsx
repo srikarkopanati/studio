@@ -40,11 +40,10 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     );
   }
 
-  // car.imageUrl is the search hint, e.g., "Maruti Suzuki Swift"
-  // We use car.id as part of the seed to ensure a unique image for each car if multiple cars have similar hints
-  const imageSearchHint = car.imageUrl;
-  const imageSeed = `${encodeURIComponent(car.id)}-${encodeURIComponent(imageSearchHint)}`;
-  const imageSrc = `https://picsum.photos/seed/${imageSeed}/1200/800`;
+  // Use unsplash to find images based on make and model
+  const mainImageSearchTerm = `${car.make} ${car.model}`;
+  const mainImageSrc = `https://source.unsplash.com/featured/?${encodeURIComponent(mainImageSearchTerm)}&w=1200&h=800`;
+  const mainImageSearchHint = `${car.make} ${car.model}`;
 
 
   return (
@@ -63,15 +62,15 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
         <CardHeader className="p-0">
           <div className="relative w-full h-72 md:h-96 lg:h-[500px]">
             <Image
-              src={imageSrc}
+              src={mainImageSrc}
               alt={`Image of ${car.make} ${car.model}`}
               fill
               style={{ objectFit: 'cover' }}
               className="bg-muted"
-              data-ai-hint={imageSearchHint} // This hint is for potential AI image replacement tools
-              priority // Prioritize loading for LCP
+              data-ai-hint={mainImageSearchHint} 
+              priority 
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              key={car.id} // Ensure re-render if car changes
+              key={`${car.id}-details-image`} // Unique key for image
             />
           </div>
         </CardHeader>
@@ -144,11 +143,15 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
               <div>
                 <h3 className="text-xl font-semibold text-primary mb-3">More Images</h3>
                 <div className="grid grid-cols-2 gap-4">
-                  {[...Array(2)].map((_, i) => (
-                    <div key={i} className="relative aspect-video bg-muted rounded-md overflow-hidden">
-                       <Image src={`https://picsum.photos/seed/${encodeURIComponent(car.id + i + car.make)}/400/300`} alt={`More image ${i+1}`} fill style={{objectFit: "cover"}} data-ai-hint={`${car.make} ${car.model} detail`} />
-                    </div>
-                  ))}
+                  {[...Array(2)].map((_, i) => {
+                    const moreImageSearchTerm = `${car.make} ${car.model} interior ${i+1}`; // Example: "Toyota Camry interior 1"
+                    const moreImageSrc = `https://source.unsplash.com/featured/?${encodeURIComponent(moreImageSearchTerm)}&w=400&h=300`;
+                    return (
+                       <div key={i} className="relative aspect-video bg-muted rounded-md overflow-hidden">
+                         <Image src={moreImageSrc} alt={`More image ${i+1} of ${car.make} ${car.model}`} fill style={{objectFit: "cover"}} data-ai-hint={`${car.make} ${car.model} detail`} />
+                      </div>
+                    );
+                  })}
                 </div>
                  <p className="text-xs text-muted-foreground mt-2">Note: Image gallery feature can be expanded with actual car images.</p>
               </div>
