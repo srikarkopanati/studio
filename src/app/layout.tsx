@@ -1,3 +1,4 @@
+
 import type {Metadata} from 'next';
 import { Geist, Geist_Mono } from 'next/font/google'; // Assuming Geist is already available
 import './globals.css';
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({ // Use Geist Mono or a suitable mono font
 });
 
 export const metadata: Metadata = {
-  title: 'Wheels Online - Find Your Dream Car',
+  title: 'The Wheels Garage - Find Your Dream Car',
   description: 'An online platform to browse, search, and find your perfect car. Features an AI Car Finder.',
 };
 
@@ -38,3 +39,4 @@ export default function RootLayout({
     </html>
   );
 }
+

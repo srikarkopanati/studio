@@ -1,3 +1,4 @@
+
 // src/components/layout/Header.tsx
 "use client";
 
@@ -25,7 +26,7 @@ export function Header() {
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
         <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
           <Car className="h-7 w-7 text-primary" />
-          <span className="text-xl font-bold text-primary">Wheels Online</span>
+          <span className="text-xl font-bold text-primary">The Wheels Garage</span>
         </Link>
 
         {/* Desktop Navigation */}
@@ -57,7 +58,7 @@ export function Header() {
               <div className="flex flex-col space-y-6">
                 <Link href="/" className="flex items-center gap-2 mb-4" onClick={() => setIsMobileMenuOpen(false)}>
                   <Car className="h-7 w-7 text-primary" />
-                  <span className="text-xl font-bold text-primary">Wheels Online</span>
+                  <span className="text-xl font-bold text-primary">The Wheels Garage</span>
                 </Link>
                 {navItems.map((item) => (
                   <SheetClose key={item.href} asChild>
@@ -81,3 +82,4 @@ export function Header() {
     </header>
   );
 }
+

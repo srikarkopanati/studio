@@ -1,4 +1,5 @@
 
+
 import { HeroSection } from '@/components/shared/HeroSection';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { CarList } from '@/components/cars/CarList';
@@ -37,14 +38,14 @@ export default function HomePage() {
         subtitle="Browse thousands of new and used cars, or let our AI guide you to the perfect match."
         ctaText="Explore Car Gallery"
         ctaLink="/gallery"
-        imageUrl="https://source.unsplash.com/featured/?modern_car&w=1920&h=1080"
-        imageHint="modern car"
+        imageUrl="https://picsum.photos/seed/hero-car/1920/1080"
+        imageHint="modern car showroom"
       />
 
       <section className="py-16 md:py-24 bg-secondary">
         <div className="container mx-auto px-4">
           <SectionTitle
-            title="Why Choose Wheels Online?"
+            title="Why Choose The Wheels Garage?"
             subtitle="We offer a seamless and intelligent car buying experience."
           />
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -100,3 +101,4 @@ export default function HomePage() {
     </>
   );
 }
+
