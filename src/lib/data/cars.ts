@@ -7,8 +7,8 @@ export const cars: Car[] = [
     make: 'Maruti Suzuki',
     model: 'Swift',
     year: 2023,
-    price: 750000, // INR
-    imageUrl: 'Maruti Suzuki Swift', 
+    price: 525000, // INR, Original: 750000
+    imageUrl: 'Swift official', 
     description: 'A popular and fuel-efficient hatchback, known for its sporty handling and reliability. Ideal for city driving.',
     features: ['Automatic (AGS)', 'Touchscreen Infotainment', 'LED Projector Headlamps', 'Apple CarPlay', 'Android Auto'],
     mileage: 12000, // KMs
@@ -20,8 +20,8 @@ export const cars: Car[] = [
     make: 'Hyundai',
     model: 'Creta',
     year: 2023,
-    price: 1500000, // INR
-    imageUrl: 'Hyundai Creta white',
+    price: 1050000, // INR, Original: 1500000
+    imageUrl: 'Creta official',
     description: 'A best-selling compact SUV offering a premium cabin, multiple engine options, and a comfortable ride.',
     features: ['Panoramic Sunroof', 'Ventilated Seats', 'Bose Sound System', 'Connected Car Tech', 'Air Purifier'],
     mileage: 18000, // KMs
@@ -33,8 +33,8 @@ export const cars: Car[] = [
     make: 'Kia',
     model: 'Seltos',
     year: 2024,
-    price: 1650000, // INR
-    imageUrl: 'Kia Seltos blue',
+    price: 1155000, // INR, Original: 1650000
+    imageUrl: 'Seltos official',
     description: 'A stylish and feature-rich compact SUV, a strong competitor to the Creta with a bold design.',
     features: ['Heads-up Display', '360-degree Camera', 'Ambient Lighting', 'Smart Air Purifier', 'Multiple Drive Modes'],
     mileage: 7500, // KMs
@@ -46,8 +46,8 @@ export const cars: Car[] = [
     make: 'Tata',
     model: 'Nexon EV',
     year: 2023,
-    price: 1700000, // INR
-    imageUrl: 'Tata Nexon EV teal',
+    price: 1190000, // INR, Original: 1700000
+    imageUrl: 'NexonEV official',
     description: 'India\'s best-selling electric SUV, offering a good range, safety, and a comfortable driving experience.',
     features: ['Ziptron Technology', 'Regenerative Braking', 'Floating Touchscreen', 'iRA Connected Car Tech', 'Sunroof'],
     mileage: 15000, // KMs
@@ -59,8 +59,8 @@ export const cars: Car[] = [
     make: 'Mahindra',
     model: 'XUV700',
     year: 2023,
-    price: 2200000, // INR
-    imageUrl: 'Mahindra XUV700 red',
+    price: 1540000, // INR, Original: 2200000
+    imageUrl: 'XUV700 official',
     description: 'A feature-packed and powerful SUV with advanced safety (ADAS) and luxurious interiors.',
     features: ['ADAS Level 2', 'Dual HD Superscreen', 'Skyroof (Panoramic Sunroof)', 'Sony 3D Sound System', 'All-Wheel Drive (Optional)'],
     mileage: 20000, // KMs
@@ -72,8 +72,8 @@ export const cars: Car[] = [
     make: 'Toyota',
     model: 'Innova Crysta',
     year: 2022,
-    price: 2400000, // INR
-    imageUrl: 'Toyota Innova Crysta silver',
+    price: 1680000, // INR, Original: 2400000
+    imageUrl: 'InnovaCrysta official',
     description: 'A highly reliable and spacious MPV, known for its comfort, durability, and resale value.',
     features: ['Captain Seats (Optional)', 'Rear AC Vents', 'Eco & Power Drive Modes', '7 Airbags', 'Spacious Cabin'],
     mileage: 30000, // KMs
@@ -85,8 +85,8 @@ export const cars: Car[] = [
     make: 'Honda',
     model: 'City',
     year: 2023,
-    price: 1400000, // INR
-    imageUrl: 'Honda City white sedan',
+    price: 980000, // INR, Original: 1400000
+    imageUrl: 'HondaCity official',
     description: 'A premium mid-size sedan known for its refined i-VTEC engine, spacious cabin, and comfortable ride.',
     features: ['LaneWatch Camera', 'Full LED Headlamps', 'Sunroof', 'Honda Connect', 'ASEAN NCAP 5-star'],
     mileage: 16000, // KMs
@@ -98,8 +98,8 @@ export const cars: Car[] = [
     make: 'Volkswagen',
     model: 'Virtus',
     year: 2024,
-    price: 1550000, // INR
-    imageUrl: 'Volkswagen Virtus yellow',
+    price: 1085000, // INR, Original: 1550000
+    imageUrl: 'Virtus official',
     description: 'A sophisticated and fun-to-drive mid-size sedan with powerful TSI engines and solid build quality.',
     features: ['Digital Cockpit', 'Ventilated Front Seats', 'Wireless AppConnect', '6 Airbags', 'ESC'],
     mileage: 6000, // KMs
@@ -111,8 +111,8 @@ export const cars: Car[] = [
     make: 'Skoda',
     model: 'Kushaq',
     year: 2023,
-    price: 1600000, // INR
-    imageUrl: 'Skoda Kushaq orange',
+    price: 1120000, // INR, Original: 1600000
+    imageUrl: 'Kushaq official',
     description: 'A well-built compact SUV offering a strong performance, European design, and good safety features.',
     features: ['MySkoda Connect', 'Crystalline LED Headlights', 'Ventilated Leather Seats', 'Sunroof', 'TSI Engines'],
     mileage: 13000, // KMs
@@ -124,8 +124,8 @@ export const cars: Car[] = [
     make: 'Renault',
     model: 'Kiger',
     year: 2023,
-    price: 850000, // INR
-    imageUrl: 'Renault Kiger red',
+    price: 595000, // INR, Original: 850000
+    imageUrl: 'Kiger official',
     description: 'A compact and stylish SUV offering good value for money with a decent features list and engine options.',
     features: ['Wireless Smartphone Replication', 'PM2.5 Air Filter', 'Multi-Sense Drive Modes', 'LED Headlamps', 'Smart Access Card'],
     mileage: 10000, // KMs
@@ -133,4 +133,3 @@ export const cars: Car[] = [
     fuelType: 'Petrol',
   },
 ];
-
