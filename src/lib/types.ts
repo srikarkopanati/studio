@@ -3,23 +3,23 @@ export interface Car {
   make: string;
   model: string;
   year: number;
-  price: number;
+  price: number; // Price in INR
   imageUrl: string;
   description: string;
   features: string[];
-  mileage: number;
+  mileage: number; // Mileage in KMs
   engineType: string;
   fuelType: string;
 }
 
 // For AI Car Finder form
 export const budgetOptions = [
-  { value: "under $10,000", label: "Under $10,000" },
-  { value: "$10,000 - $20,000", label: "$10,000 - $20,000" },
-  { value: "$20,000 - $30,000", label: "$20,000 - $30,000" },
-  { value: "$30,000 - $50,000", label: "$30,000 - $50,000" },
-  { value: "above $50,000", label: "Above $50,000" },
-  { value: "flexible", label: "Flexible" },
+  { value: "under ₹8,00,000", label: "Under ₹8,00,000" },
+  { value: "₹8,00,000 - ₹15,00,000", label: "₹8,00,000 - ₹15,00,000" },
+  { value: "₹15,00,000 - ₹25,00,000", label: "₹15,00,000 - ₹25,00,000" },
+  { value: "₹25,00,000 - ₹40,00,000", label: "₹25,00,000 - ₹40,00,000" },
+  { value: "above ₹40,00,000", label: "Above ₹40,00,000" },
+  { value: "flexible", label: "Flexible (No specific budget)" },
 ];
 
 export const familySizeOptions = [
@@ -36,3 +36,5 @@ export const usageOptions = [
   { value: "performance / weekend drives", label: "Performance / Weekend Drives" },
   { value: "business / professional use", label: "Business / Professional Use" },
 ];
+
+```

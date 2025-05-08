@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect } from 'react'; // useEffect will be removed for priceRange
-import { useForm, SubmitHandler, Controller } from 'react-hook-form'; // Import Controller
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'; 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -27,19 +26,19 @@ interface AdvancedSearchFormProps {
   allCars: Car[];
   onSearch: (filteredCars: Car[]) => void;
   uniqueMakes: string[];
-  minPrice: number;
-  maxPrice: number;
+  minPrice: number; // Expected in INR
+  maxPrice: number; // Expected in INR
 }
 
 const currentYear = new Date().getFullYear();
-const ANY_MAKE_VALUE = "_ANY_MAKE_"; // Special value for "Any Make"
+const ANY_MAKE_VALUE = "_ANY_MAKE_"; 
 
 export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, maxPrice }: AdvancedSearchFormProps) {
   
-  const { register, handleSubmit, control, reset, formState: { errors } } = useForm<SearchFormData>({
+  const { register, handleSubmit, control, reset, watch, formState: { errors } } = useForm<SearchFormData>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      make: '', // Represents "Any Make"
+      make: '', 
       model: '',
       minYear: '',
       maxYear: '',
@@ -47,10 +46,22 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
     },
   });
 
+  // Watch for changes in minPrice and maxPrice props to update form's default/reset values if needed
+  React.useEffect(() => {
+    reset({
+      make: watch('make') || '',
+      model: watch('model') || '',
+      minYear: watch('minYear') || '',
+      maxYear: watch('maxYear') || '',
+      priceRange: [minPrice, maxPrice]
+    });
+  }, [minPrice, maxPrice, reset, watch]);
+
+
   const onSubmit: SubmitHandler<SearchFormData> = (data) => {
     let filtered = [...allCars];
 
-    if (data.make) { // data.make will be "" for "Any Make", so this condition is fine
+    if (data.make) { 
       filtered = filtered.filter(car => car.make.toLowerCase() === data.make?.toLowerCase());
     }
     if (data.model) {
@@ -76,8 +87,10 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       maxYear: '',
       priceRange: [minPrice, maxPrice],
     });
-    onSearch(allCars); // Reset to show all cars
+    onSearch(allCars); 
   };
+
+  const currentPriceRange = watch("priceRange") || [minPrice, maxPrice];
 
   return (
     <Card className="shadow-lg mb-12 bg-card">
@@ -97,7 +110,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
               render={({ field }) => (
                 <Select
                   onValueChange={(value) => field.onChange(value === ANY_MAKE_VALUE ? "" : value)}
-                  value={field.value === "" ? ANY_MAKE_VALUE : field.value}
+                  value={field.value === "" ? ANY_MAKE_VALUE : field.value || ANY_MAKE_VALUE}
                 >
                   <SelectTrigger id="make-select" className="w-full">
                     <SelectValue placeholder="Any Make" />
@@ -142,13 +155,13 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
                     onValueChange={field.onChange}
                     min={minPrice}
                     max={maxPrice}
-                    step={1000}
+                    step={50000} // Adjusted step for INR
                     minStepsBetweenThumbs={1}
                     className="my-4"
                   />
                   <div className="text-sm text-muted-foreground flex justify-between">
-                    <span>${field.value ? field.value[0].toLocaleString() : minPrice.toLocaleString()}</span>
-                    <span>${field.value ? field.value[1].toLocaleString() : maxPrice.toLocaleString()}</span>
+                    <span>₹{currentPriceRange[0].toLocaleString('en-IN')}</span>
+                    <span>₹{currentPriceRange[1].toLocaleString('en-IN')}</span>
                   </div>
                 </>
               )}
@@ -168,3 +181,5 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
     </Card>
   );
 }
+
+```

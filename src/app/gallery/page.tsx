@@ -11,12 +11,19 @@ import { Skeleton } from '@/components/ui/skeleton'; // For loading state
 export default function GalleryPage() {
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [pageMinPrice, setPageMinPrice] = useState(0);
+  const [pageMaxPrice, setPageMaxPrice] = useState(10000000); // Default max in INR
 
   // Simulate API call / data loading
   useEffect(() => {
     // In a real app, you'd fetch this data
     setTimeout(() => {
       setFilteredCars(allCarsData);
+      if (allCarsData.length > 0) {
+        const prices = allCarsData.map(car => car.price);
+        setPageMinPrice(Math.min(...prices));
+        setPageMaxPrice(Math.max(...prices));
+      }
       setIsLoading(false);
     }, 500); // Simulate network delay
   }, []);
@@ -30,14 +37,6 @@ export default function GalleryPage() {
     return Array.from(makes).sort();
   }, []);
 
-  const priceRange = useMemo(() => {
-    if (allCarsData.length === 0) return { min: 0, max: 100000 };
-    const prices = allCarsData.map(car => car.price);
-    return {
-      min: Math.min(...prices),
-      max: Math.max(...prices),
-    };
-  }, []);
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -51,8 +50,8 @@ export default function GalleryPage() {
           allCars={allCarsData}
           onSearch={handleSearch}
           uniqueMakes={uniqueMakes}
-          minPrice={priceRange.min}
-          maxPrice={priceRange.max}
+          minPrice={pageMinPrice}
+          maxPrice={pageMaxPrice}
         />
       ) : (
         <CardSkeleton />

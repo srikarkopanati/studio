@@ -1,3 +1,4 @@
+
 import type { Car } from '@/lib/types';
 
 export const cars: Car[] = [
@@ -6,11 +7,11 @@ export const cars: Car[] = [
     make: 'Toyota',
     model: 'Camry',
     year: 2023,
-    price: 28500,
+    price: 2280000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=1',
     description: 'A reliable and fuel-efficient sedan, perfect for families and daily commutes.',
     features: ['Automatic', 'Sunroof', 'Lane Assist', 'Apple CarPlay'],
-    mileage: 15000,
+    mileage: 24000, // KMs
     engineType: '2.5L 4-Cylinder',
     fuelType: 'Petrol',
   },
@@ -19,11 +20,11 @@ export const cars: Car[] = [
     make: 'Honda',
     model: 'CR-V',
     year: 2022,
-    price: 32000,
+    price: 2560000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=2',
     description: 'Versatile SUV with ample space and advanced safety features.',
     features: ['AWD', 'Panoramic Roof', 'Heated Seats', 'Android Auto'],
-    mileage: 22000,
+    mileage: 35200, // KMs
     engineType: '1.5L Turbocharged',
     fuelType: 'Petrol',
   },
@@ -32,11 +33,11 @@ export const cars: Car[] = [
     make: 'Ford',
     model: 'Mustang',
     year: 2024,
-    price: 45000,
+    price: 3600000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=3',
     description: 'Iconic American muscle car with thrilling performance and modern tech.',
     features: ['V8 Engine', 'Performance Exhaust', 'Leather Seats', 'Digital Dash'],
-    mileage: 5000,
+    mileage: 8000, // KMs
     engineType: '5.0L V8',
     fuelType: 'Petrol',
   },
@@ -45,11 +46,11 @@ export const cars: Car[] = [
     make: 'Tesla',
     model: 'Model 3',
     year: 2023,
-    price: 42000,
+    price: 3360000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=4',
     description: 'Popular electric sedan with cutting-edge technology and impressive range.',
     features: ['Autopilot', 'Full Glass Roof', 'Premium Interior', 'Over-the-air updates'],
-    mileage: 12000,
+    mileage: 19200, // KMs
     engineType: 'Electric Motor',
     fuelType: 'Electric',
   },
@@ -58,11 +59,11 @@ export const cars: Car[] = [
     make: 'BMW',
     model: 'X5',
     year: 2022,
-    price: 65000,
+    price: 5200000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=5',
     description: 'Luxury SUV offering a blend of comfort, performance, and technology.',
     features: ['xDrive AWD', 'Harman Kardon Sound', 'Heads-up Display', 'Gesture Control'],
-    mileage: 18000,
+    mileage: 28800, // KMs
     engineType: '3.0L 6-Cylinder Turbo',
     fuelType: 'Petrol',
   },
@@ -71,11 +72,11 @@ export const cars: Car[] = [
     make: 'Mercedes-Benz',
     model: 'C-Class',
     year: 2023,
-    price: 52000,
+    price: 4160000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=6',
     description: 'Elegant and sophisticated sedan with a focus on luxury and refinement.',
     features: ['MBUX Infotainment', 'Ambient Lighting', 'Burmester Sound', 'Driver Assistance Package'],
-    mileage: 9000,
+    mileage: 14400, // KMs
     engineType: '2.0L 4-Cylinder Turbo',
     fuelType: 'Petrol',
   },
@@ -84,11 +85,11 @@ export const cars: Car[] = [
     make: 'Audi',
     model: 'A4',
     year: 2023,
-    price: 43000,
+    price: 3440000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=7',
     description: 'A well-rounded compact luxury sedan with Quattro all-wheel drive.',
     features: ['Virtual Cockpit', 'Quattro AWD', 'Bang & Olufsen Sound', 'Matrix LED headlights'],
-    mileage: 11000,
+    mileage: 17600, // KMs
     engineType: '2.0L TFSI 4-Cylinder',
     fuelType: 'Petrol',
   },
@@ -97,11 +98,11 @@ export const cars: Car[] = [
     make: 'Jeep',
     model: 'Wrangler',
     year: 2024,
-    price: 48000,
+    price: 3840000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=8',
     description: 'Legendary off-road SUV capable of tackling any terrain.',
     features: ['4x4 System', 'Removable Top', 'Uconnect Infotainment', 'Trail Rated'],
-    mileage: 3000,
+    mileage: 4800, // KMs
     engineType: '3.6L V6',
     fuelType: 'Petrol',
   },
@@ -110,11 +111,11 @@ export const cars: Car[] = [
     make: 'Subaru',
     model: 'Outback',
     year: 2022,
-    price: 35000,
+    price: 2800000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=9',
     description: 'Rugged and capable wagon perfect for outdoor adventures.',
     features: ['Symmetrical AWD', 'EyeSight Driver Assist', 'Starlink Multimedia', 'Roof Rails'],
-    mileage: 25000,
+    mileage: 40000, // KMs
     engineType: '2.5L Boxer Engine',
     fuelType: 'Petrol',
   },
@@ -123,11 +124,11 @@ export const cars: Car[] = [
     make: 'Kia',
     model: 'Telluride',
     year: 2023,
-    price: 47000,
+    price: 3760000, // INR
     imageUrl: 'https://picsum.photos/600/400?random=10',
     description: 'Award-winning 3-row SUV with a spacious interior and premium features.',
     features: ['3rd Row Seating', 'Nappa Leather', 'Dual Sunroofs', 'Highway Driving Assist'],
-    mileage: 14000,
+    mileage: 22400, // KMs
     engineType: '3.8L V6',
     fuelType: 'Petrol',
   },

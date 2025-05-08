@@ -1,3 +1,4 @@
+
 import type { Car } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -45,11 +46,11 @@ export function CarCard({ car }: CarCardProps) {
         <div className="space-y-2 text-sm text-foreground">
           <div className="flex items-center gap-2">
             <DollarSign className="w-4 h-4 text-accent" />
-            <span>Price: ${car.price.toLocaleString()}</span>
+            <span>Price: ₹{car.price.toLocaleString('en-IN')}</span>
           </div>
           <div className="flex items-center gap-2">
             <Gauge className="w-4 h-4 text-accent" />
-            <span>Mileage: {car.mileage.toLocaleString()} miles</span>
+            <span>Mileage: {car.mileage.toLocaleString('en-IN')} km</span>
           </div>
           <div className="flex items-center gap-2">
             <Fuel className="w-4 h-4 text-accent" />
