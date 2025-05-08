@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useEffect } from 'react'; // useEffect will be removed for priceRange
+import { useForm, SubmitHandler, Controller } from 'react-hook-form'; // Import Controller
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { Button } from '@/components/ui/button';
@@ -32,29 +32,25 @@ interface AdvancedSearchFormProps {
 }
 
 const currentYear = new Date().getFullYear();
+const ANY_MAKE_VALUE = "_ANY_MAKE_"; // Special value for "Any Make"
 
 export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, maxPrice }: AdvancedSearchFormProps) {
-  const [currentPriceRange, setCurrentPriceRange] = useState<[number, number]>([minPrice, maxPrice]);
   
-  const { register, handleSubmit, control, reset, watch, formState: { errors } } = useForm<SearchFormData>({
+  const { register, handleSubmit, control, reset, formState: { errors } } = useForm<SearchFormData>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
+      make: '', // Represents "Any Make"
+      model: '',
+      minYear: '',
+      maxYear: '',
       priceRange: [minPrice, maxPrice],
     },
   });
 
-  // Update price range display when slider changes
-  const watchedPriceRange = watch("priceRange");
-  useEffect(() => {
-    if (watchedPriceRange) {
-      setCurrentPriceRange(watchedPriceRange as [number, number]);
-    }
-  }, [watchedPriceRange]);
-
   const onSubmit: SubmitHandler<SearchFormData> = (data) => {
     let filtered = [...allCars];
 
-    if (data.make) {
+    if (data.make) { // data.make will be "" for "Any Make", so this condition is fine
       filtered = filtered.filter(car => car.make.toLowerCase() === data.make?.toLowerCase());
     }
     if (data.model) {
@@ -80,7 +76,6 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       maxYear: '',
       priceRange: [minPrice, maxPrice],
     });
-    setCurrentPriceRange([minPrice, maxPrice]);
     onSearch(allCars); // Reset to show all cars
   };
 
@@ -95,18 +90,27 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       <CardContent>
         <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           <div className="space-y-2">
-            <Label htmlFor="make">Make</Label>
-            <Select onValueChange={(value) => control._formValues.make = value} value={watch("make")}>
-              <SelectTrigger id="make" className="w-full">
-                <SelectValue placeholder="Any Make" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="">Any Make</SelectItem>
-                {uniqueMakes.map(make => (
-                  <SelectItem key={make} value={make}>{make}</SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Label htmlFor="make-select">Make</Label>
+            <Controller
+              name="make"
+              control={control}
+              render={({ field }) => (
+                <Select
+                  onValueChange={(value) => field.onChange(value === ANY_MAKE_VALUE ? "" : value)}
+                  value={field.value === "" ? ANY_MAKE_VALUE : field.value}
+                >
+                  <SelectTrigger id="make-select" className="w-full">
+                    <SelectValue placeholder="Any Make" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value={ANY_MAKE_VALUE}>Any Make</SelectItem>
+                    {uniqueMakes.map(make => (
+                      <SelectItem key={make} value={make}>{make}</SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              )}
+            />
           </div>
 
           <div className="space-y-2">
@@ -128,22 +132,27 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
           
           <div className="space-y-2 md:col-span-2 lg:col-span-1">
             <Label>Price Range</Label>
-            <Slider
-              defaultValue={[minPrice, maxPrice]}
-              min={minPrice}
-              max={maxPrice}
-              step={1000}
-              minStepsBetweenThumbs={1}
-              onValueChange={(value) => {
-                setCurrentPriceRange(value as [number,number]);
-                control._formValues.priceRange = value;
-              }}
-              className="my-4"
+            <Controller
+              name="priceRange"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Slider
+                    value={field.value}
+                    onValueChange={field.onChange}
+                    min={minPrice}
+                    max={maxPrice}
+                    step={1000}
+                    minStepsBetweenThumbs={1}
+                    className="my-4"
+                  />
+                  <div className="text-sm text-muted-foreground flex justify-between">
+                    <span>${field.value ? field.value[0].toLocaleString() : minPrice.toLocaleString()}</span>
+                    <span>${field.value ? field.value[1].toLocaleString() : maxPrice.toLocaleString()}</span>
+                  </div>
+                </>
+              )}
             />
-            <div className="text-sm text-muted-foreground flex justify-between">
-              <span>${currentPriceRange[0].toLocaleString()}</span>
-              <span>${currentPriceRange[1].toLocaleString()}</span>
-            </div>
           </div>
 
           <div className="md:col-span-2 lg:col-span-3 flex flex-col sm:flex-row gap-4 pt-4">
