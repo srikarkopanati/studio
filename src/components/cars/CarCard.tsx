@@ -11,10 +11,12 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  // car.imageUrl contains the search hint like "Toyota Camry"
+  // car.imageUrl is the search hint, e.g., "Maruti Suzuki Swift"
   const imageSearchHint = car.imageUrl; 
-  // Use picsum.photos for reliable placeholder images
-  const imageSrc = `https://picsum.photos/seed/${encodeURIComponent(car.id)}/600/400`;
+  // Use picsum.photos with a unique seed for each car to get varied images.
+  // Combining car.id with the hint ensures more uniqueness if hints are similar.
+  const imageSeed = `${encodeURIComponent(car.id)}-${encodeURIComponent(imageSearchHint)}`;
+  const imageSrc = `https://picsum.photos/seed/${imageSeed}/600/400`;
 
 
   return (
@@ -26,11 +28,11 @@ export function CarCard({ car }: CarCardProps) {
             alt={`${car.make} ${car.model}`}
             fill
             style={{ objectFit: 'cover' }}
-            className="transition-transform duration-300 group-hover:scale-105"
+            className="transition-transform duration-300 group-hover:scale-105 bg-muted"
             data-ai-hint={imageSearchHint} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-            priority={false} // Set to true for LCP images if applicable on a page
-            key={car.id} // Add key for better reconciliation if list reorders
+            priority={false}
+            key={car.id} 
           />
         </div>
       </CardHeader>
@@ -47,7 +49,7 @@ export function CarCard({ car }: CarCardProps) {
           </div>
           <div className="flex items-center gap-2">
             <Gauge className="w-4 h-4 text-accent" />
-            <span>Mileage: {car.mileage.toLocaleString('en-IN')} km</span>
+            <span>KMs Driven: {car.mileage.toLocaleString('en-IN')} km</span>
           </div>
           <div className="flex items-center gap-2">
             <Fuel className="w-4 h-4 text-accent" />

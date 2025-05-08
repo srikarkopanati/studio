@@ -40,8 +40,12 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     );
   }
 
+  // car.imageUrl is the search hint, e.g., "Maruti Suzuki Swift"
+  // We use car.id as part of the seed to ensure a unique image for each car if multiple cars have similar hints
   const imageSearchHint = car.imageUrl;
-  const imageSrc = `https://picsum.photos/seed/${encodeURIComponent(car.id)}/1200/800`;
+  const imageSeed = `${encodeURIComponent(car.id)}-${encodeURIComponent(imageSearchHint)}`;
+  const imageSrc = `https://picsum.photos/seed/${imageSeed}/1200/800`;
+
 
   return (
     <div className="container mx-auto px-4 py-12">
@@ -64,9 +68,10 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
               fill
               style={{ objectFit: 'cover' }}
               className="bg-muted"
-              data-ai-hint={imageSearchHint}
+              data-ai-hint={imageSearchHint} // This hint is for potential AI image replacement tools
               priority // Prioritize loading for LCP
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+              key={car.id} // Ensure re-render if car changes
             />
           </div>
         </CardHeader>
@@ -115,7 +120,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
                 <div className="flex items-center gap-3">
                   <Gauge className="w-5 h-5 text-accent flex-shrink-0" />
                   <div>
-                    <span className="font-medium text-foreground">Mileage:</span>
+                    <span className="font-medium text-foreground">KMs Driven:</span>
                     <span className="text-muted-foreground ml-1">{car.mileage.toLocaleString('en-IN')} km</span>
                   </div>
                 </div>
@@ -134,15 +139,14 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
                   </div>
                 </div>
               </div>
-              {/* Placeholder for additional images or a gallery component */}
-              {/* 
+              {/* Placeholder for additional images or a gallery component 
               <Separator />
               <div>
                 <h3 className="text-xl font-semibold text-primary mb-3">More Images</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {[...Array(2)].map((_, i) => (
                     <div key={i} className="relative aspect-video bg-muted rounded-md overflow-hidden">
-                       <Image src={`https://picsum.photos/seed/${encodeURIComponent(car.id + i)}/400/300`} alt={`More image ${i+1}`} layout="fill" objectFit="cover" data-ai-hint={`${car.make} ${car.model} detail`} />
+                       <Image src={`https://picsum.photos/seed/${encodeURIComponent(car.id + i + car.make)}/400/300`} alt={`More image ${i+1}`} fill style={{objectFit: "cover"}} data-ai-hint={`${car.make} ${car.model} detail`} />
                     </div>
                   ))}
                 </div>
@@ -163,3 +167,4 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     </div>
   );
 }
+

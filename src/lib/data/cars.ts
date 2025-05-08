@@ -4,132 +4,133 @@ import type { Car } from '@/lib/types';
 export const cars: Car[] = [
   {
     id: '1',
-    make: 'Toyota',
-    model: 'Camry',
+    make: 'Maruti Suzuki',
+    model: 'Swift',
     year: 2023,
-    price: 2280000, // INR
-    imageUrl: 'Toyota Camry', // Search hint for Unsplash
-    description: 'A reliable and fuel-efficient sedan, perfect for families and daily commutes.',
-    features: ['Automatic', 'Sunroof', 'Lane Assist', 'Apple CarPlay'],
-    mileage: 24000, // KMs
-    engineType: '2.5L 4-Cylinder',
+    price: 750000, // INR
+    imageUrl: 'Maruti Suzuki Swift', 
+    description: 'A popular and fuel-efficient hatchback, known for its sporty handling and reliability. Ideal for city driving.',
+    features: ['Automatic (AGS)', 'Touchscreen Infotainment', 'LED Projector Headlamps', 'Apple CarPlay', 'Android Auto'],
+    mileage: 12000, // KMs
+    engineType: '1.2L K-Series Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '2',
-    make: 'Honda',
-    model: 'CR-V',
-    year: 2022,
-    price: 2560000, // INR
-    imageUrl: 'Honda CRV', // Search hint for Unsplash
-    description: 'Versatile SUV with ample space and advanced safety features.',
-    features: ['AWD', 'Panoramic Roof', 'Heated Seats', 'Android Auto'],
-    mileage: 35200, // KMs
-    engineType: '1.5L Turbocharged',
+    make: 'Hyundai',
+    model: 'Creta',
+    year: 2023,
+    price: 1500000, // INR
+    imageUrl: 'Hyundai Creta white',
+    description: 'A best-selling compact SUV offering a premium cabin, multiple engine options, and a comfortable ride.',
+    features: ['Panoramic Sunroof', 'Ventilated Seats', 'Bose Sound System', 'Connected Car Tech', 'Air Purifier'],
+    mileage: 18000, // KMs
+    engineType: '1.5L MPi Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '3',
-    make: 'Ford',
-    model: 'Mustang',
+    make: 'Kia',
+    model: 'Seltos',
     year: 2024,
-    price: 3600000, // INR
-    imageUrl: 'Ford Mustang', // Search hint for Unsplash
-    description: 'Iconic American muscle car with thrilling performance and modern tech.',
-    features: ['V8 Engine', 'Performance Exhaust', 'Leather Seats', 'Digital Dash'],
-    mileage: 8000, // KMs
-    engineType: '5.0L V8',
+    price: 1650000, // INR
+    imageUrl: 'Kia Seltos blue',
+    description: 'A stylish and feature-rich compact SUV, a strong competitor to the Creta with a bold design.',
+    features: ['Heads-up Display', '360-degree Camera', 'Ambient Lighting', 'Smart Air Purifier', 'Multiple Drive Modes'],
+    mileage: 7500, // KMs
+    engineType: '1.5L Smartstream Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '4',
-    make: 'Tesla',
-    model: 'Model 3',
+    make: 'Tata',
+    model: 'Nexon EV',
     year: 2023,
-    price: 3360000, // INR
-    imageUrl: 'Tesla Model 3', // Search hint for Unsplash
-    description: 'Popular electric sedan with cutting-edge technology and impressive range.',
-    features: ['Autopilot', 'Full Glass Roof', 'Premium Interior', 'Over-the-air updates'],
-    mileage: 19200, // KMs
-    engineType: 'Electric Motor',
+    price: 1700000, // INR
+    imageUrl: 'Tata Nexon EV teal',
+    description: 'India\'s best-selling electric SUV, offering a good range, safety, and a comfortable driving experience.',
+    features: ['Ziptron Technology', 'Regenerative Braking', 'Floating Touchscreen', 'iRA Connected Car Tech', 'Sunroof'],
+    mileage: 15000, // KMs
+    engineType: 'Permanent Magnet Synchronous Motor',
     fuelType: 'Electric',
   },
   {
     id: '5',
-    make: 'BMW',
-    model: 'X5',
-    year: 2022,
-    price: 5200000, // INR
-    imageUrl: 'BMW X5', // Search hint for Unsplash
-    description: 'Luxury SUV offering a blend of comfort, performance, and technology.',
-    features: ['xDrive AWD', 'Harman Kardon Sound', 'Heads-up Display', 'Gesture Control'],
-    mileage: 28800, // KMs
-    engineType: '3.0L 6-Cylinder Turbo',
+    make: 'Mahindra',
+    model: 'XUV700',
+    year: 2023,
+    price: 2200000, // INR
+    imageUrl: 'Mahindra XUV700 red',
+    description: 'A feature-packed and powerful SUV with advanced safety (ADAS) and luxurious interiors.',
+    features: ['ADAS Level 2', 'Dual HD Superscreen', 'Skyroof (Panoramic Sunroof)', 'Sony 3D Sound System', 'All-Wheel Drive (Optional)'],
+    mileage: 20000, // KMs
+    engineType: '2.0L mStallion Turbo-Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '6',
-    make: 'Mercedes-Benz',
-    model: 'C-Class',
-    year: 2023,
-    price: 4160000, // INR
-    imageUrl: 'Mercedes Benz CClass', // Search hint for Unsplash
-    description: 'Elegant and sophisticated sedan with a focus on luxury and refinement.',
-    features: ['MBUX Infotainment', 'Ambient Lighting', 'Burmester Sound', 'Driver Assistance Package'],
-    mileage: 14400, // KMs
-    engineType: '2.0L 4-Cylinder Turbo',
+    make: 'Toyota',
+    model: 'Innova Crysta',
+    year: 2022,
+    price: 2400000, // INR
+    imageUrl: 'Toyota Innova Crysta silver',
+    description: 'A highly reliable and spacious MPV, known for its comfort, durability, and resale value.',
+    features: ['Captain Seats (Optional)', 'Rear AC Vents', 'Eco & Power Drive Modes', '7 Airbags', 'Spacious Cabin'],
+    mileage: 30000, // KMs
+    engineType: '2.7L Petrol',
     fuelType: 'Petrol',
   },
    {
     id: '7',
-    make: 'Audi',
-    model: 'A4',
+    make: 'Honda',
+    model: 'City',
     year: 2023,
-    price: 3440000, // INR
-    imageUrl: 'Audi A4', // Search hint for Unsplash
-    description: 'A well-rounded compact luxury sedan with Quattro all-wheel drive.',
-    features: ['Virtual Cockpit', 'Quattro AWD', 'Bang & Olufsen Sound', 'Matrix LED headlights'],
-    mileage: 17600, // KMs
-    engineType: '2.0L TFSI 4-Cylinder',
+    price: 1400000, // INR
+    imageUrl: 'Honda City white sedan',
+    description: 'A premium mid-size sedan known for its refined i-VTEC engine, spacious cabin, and comfortable ride.',
+    features: ['LaneWatch Camera', 'Full LED Headlamps', 'Sunroof', 'Honda Connect', 'ASEAN NCAP 5-star'],
+    mileage: 16000, // KMs
+    engineType: '1.5L i-VTEC Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '8',
-    make: 'Jeep',
-    model: 'Wrangler',
+    make: 'Volkswagen',
+    model: 'Virtus',
     year: 2024,
-    price: 3840000, // INR
-    imageUrl: 'Jeep Wrangler', // Search hint for Unsplash
-    description: 'Legendary off-road SUV capable of tackling any terrain.',
-    features: ['4x4 System', 'Removable Top', 'Uconnect Infotainment', 'Trail Rated'],
-    mileage: 4800, // KMs
-    engineType: '3.6L V6',
+    price: 1550000, // INR
+    imageUrl: 'Volkswagen Virtus yellow',
+    description: 'A sophisticated and fun-to-drive mid-size sedan with powerful TSI engines and solid build quality.',
+    features: ['Digital Cockpit', 'Ventilated Front Seats', 'Wireless AppConnect', '6 Airbags', 'ESC'],
+    mileage: 6000, // KMs
+    engineType: '1.0L TSI Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '9',
-    make: 'Subaru',
-    model: 'Outback',
-    year: 2022,
-    price: 2800000, // INR
-    imageUrl: 'Subaru Outback', // Search hint for Unsplash
-    description: 'Rugged and capable wagon perfect for outdoor adventures.',
-    features: ['Symmetrical AWD', 'EyeSight Driver Assist', 'Starlink Multimedia', 'Roof Rails'],
-    mileage: 40000, // KMs
-    engineType: '2.5L Boxer Engine',
+    make: 'Skoda',
+    model: 'Kushaq',
+    year: 2023,
+    price: 1600000, // INR
+    imageUrl: 'Skoda Kushaq orange',
+    description: 'A well-built compact SUV offering a strong performance, European design, and good safety features.',
+    features: ['MySkoda Connect', 'Crystalline LED Headlights', 'Ventilated Leather Seats', 'Sunroof', 'TSI Engines'],
+    mileage: 13000, // KMs
+    engineType: '1.0L TSI Petrol',
     fuelType: 'Petrol',
   },
   {
     id: '10',
-    make: 'Kia',
-    model: 'Telluride',
+    make: 'Renault',
+    model: 'Kiger',
     year: 2023,
-    price: 3760000, // INR
-    imageUrl: 'Kia Telluride', // Search hint for Unsplash
-    description: 'Award-winning 3-row SUV with a spacious interior and premium features.',
-    features: ['3rd Row Seating', 'Nappa Leather', 'Dual Sunroofs', 'Highway Driving Assist'],
-    mileage: 22400, // KMs
-    engineType: '3.8L V6',
+    price: 850000, // INR
+    imageUrl: 'Renault Kiger red',
+    description: 'A compact and stylish SUV offering good value for money with a decent features list and engine options.',
+    features: ['Wireless Smartphone Replication', 'PM2.5 Air Filter', 'Multi-Sense Drive Modes', 'LED Headlamps', 'Smart Access Card'],
+    mileage: 10000, // KMs
+    engineType: '1.0L Turbo Petrol',
     fuelType: 'Petrol',
   },
 ];
+
