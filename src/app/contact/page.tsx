@@ -47,7 +47,7 @@ export default function ContactPage() {
                 <User className="w-6 h-6 text-accent flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground text-sm uppercase tracking-wider">Contact Person</p>
-                  <p className="text-lg text-muted-foreground">{contactDetails.name}</p>
+                  <p className="text-lg text-accent">{contactDetails.name}</p>
                 </div>
               </div>
               <Separator />
