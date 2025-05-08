@@ -1,3 +1,4 @@
+
 'use server';
 /**
  * @fileOverview An AI car finder to suggest car models based on user preferences.
@@ -12,8 +13,9 @@ import {z} from 'genkit';
 
 const AICarFinderInputSchema = z.object({
   budget: z.string().describe('The budget for the car, specified in INR (e.g., "₹8,00,000 - ₹15,00,000", "under ₹8,00,000", "above ₹40,00,000", or "flexible").'),
-  familySize: z.string().describe('The size of the family (e.g., "1-2 people", "3-4 people", "5+ people").'),
+  familySize: z.string().describe('The size of the family (e.g., "3-4 people", "5+ people").'),
   usage: z.string().describe('The primary usage of the car (e.g., "daily city commute", "highway driving / long trips", "off-road / adventure").'),
+  mileagePreference: z.string().describe('The desired mileage preference for the car in kmpl (e.g., "20+ kmpl (High)", "15-20 kmpl (Average)", "not a primary concern").'),
 });
 export type AICarFinderInput = z.infer<typeof AICarFinderInputSchema>;
 
@@ -31,15 +33,16 @@ const prompt = ai.definePrompt({
   name: 'aiCarFinderPrompt',
   input: {schema: AICarFinderInputSchema},
   output: {schema: AICarFinderOutputSchema},
-  prompt: `You are an expert car consultant specializing in recommending car models available in the Indian market based on user preferences. Prices should be considered in Indian Rupees (INR). Mileage should be considered in kilometers (km).
+  prompt: `You are an expert car consultant specializing in recommending car models available in the Indian market based on user preferences. Prices should be considered in Indian Rupees (INR). Fuel efficiency/mileage should be considered in kilometers per liter (kmpl).
 
 You will use the following information to recommend suitable car models to the user.
 
 Budget (INR): {{{budget}}}
 Family Size: {{{familySize}}}
 Primary Usage: {{{usage}}}
+Mileage Preference (kmpl): {{{mileagePreference}}}
 
-Based on the above information, recommend a list of car models (typically 2-4 models) that would be suitable for the user in India and explain your reasoning behind the recommendations. Focus on models readily available and popular in the Indian automotive market.`,
+Based on the above information, recommend a list of car models (typically 2-4 models) that would be suitable for the user in India and explain your reasoning behind the recommendations. Focus on models readily available and popular in the Indian automotive market. Consider the mileage preference carefully in your suggestions.`,
 });
 
 const aiCarFinderFlow = ai.defineFlow(

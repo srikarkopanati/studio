@@ -8,7 +8,7 @@ export interface Car {
   imageUrl: string;
   description: string;
   features: string[];
-  mileage: number; // Mileage in KMs
+  mileage: number; // Mileage in KMs (total distance driven)
   engineType: string;
   fuelType: string;
 }
@@ -24,7 +24,7 @@ export const budgetOptions = [
 ];
 
 export const familySizeOptions = [
-  { value: "1-2 people", label: "1-2 people (Single/Couple)" },
+  // { value: "1-2 people", label: "1-2 people (Single/Couple)" }, // Removed as per request
   { value: "3-4 people", label: "3-4 people (Small Family)" },
   { value: "5+ people", label: "5+ people (Large Family)" },
 ];
@@ -36,4 +36,12 @@ export const usageOptions = [
   { value: "off-road / adventure", label: "Off-road / Adventure" },
   { value: "performance / weekend drives", label: "Performance / Weekend Drives" },
   { value: "business / professional use", label: "Business / Professional Use" },
+];
+
+export const mileagePreferenceOptions = [
+  { value: "20+ kmpl (High)", label: "20+ kmpl (High)" },
+  { value: "15-20 kmpl (Average)", label: "15-20 kmpl (Average)" },
+  { value: "10-15 kmpl (Moderate)", label: "10-15 kmpl (Moderate)" },
+  { value: "Below 10 kmpl (Performance Focus)", label: "Below 10 kmpl (Performance Focus)" },
+  { value: "not a primary concern", label: "Not a primary concern" },
 ];

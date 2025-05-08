@@ -1,3 +1,4 @@
+
 "use client";
 
 import * as React from 'react';
@@ -18,7 +19,7 @@ const searchSchema = z.object({
   model: z.string().optional(),
   minYear: z.string().optional().refine(val => !val || /^\d{4}$/.test(val), { message: "Invalid year"}),
   maxYear: z.string().optional().refine(val => !val || /^\d{4}$/.test(val), { message: "Invalid year"}),
-  priceRange: z.array(z.number()).optional(),
+  priceRange: z.array(z.number()).optional(), // INR
 });
 
 type SearchFormData = z.infer<typeof searchSchema>;
@@ -27,8 +28,8 @@ interface AdvancedSearchFormProps {
   allCars: Car[];
   onSearch: (filteredCars: Car[]) => void;
   uniqueMakes: string[];
-  minPrice: number; // Expected in INR
-  maxPrice: number; // Expected in INR
+  minPrice: number; // Expected in INR, e.g., 500000
+  maxPrice: number; // Expected in INR, e.g., 50000000
 }
 
 const currentYear = new Date().getFullYear();
@@ -43,19 +44,23 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       model: '',
       minYear: '',
       maxYear: '',
-      priceRange: [minPrice, maxPrice],
+      priceRange: [minPrice, maxPrice], // Initialize with props
     },
   });
 
-  // Watch for changes in minPrice and maxPrice props to update form's default/reset values if needed
+  // Update form's priceRange default/reset values when minPrice/maxPrice props change
   React.useEffect(() => {
-    reset({
-      make: watch('make') || ANY_MAKE_VALUE,
-      model: watch('model') || '',
-      minYear: watch('minYear') || '',
-      maxYear: watch('maxYear') || '',
-      priceRange: [minPrice, maxPrice]
-    });
+    // Only reset priceRange if the current form value is the old default or not yet set properly
+    const currentFormRange = watch("priceRange");
+    if (
+      !currentFormRange || // if not set
+      (currentFormRange[0] !== minPrice || currentFormRange[1] !== maxPrice) // or if different from new props
+    ) {
+      reset(currentValues => ({
+        ...currentValues, // keep other current form values
+        priceRange: [minPrice, maxPrice]
+      }));
+    }
   }, [minPrice, maxPrice, reset, watch]);
 
 
@@ -86,7 +91,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       model: '',
       minYear: '',
       maxYear: '',
-      priceRange: [minPrice, maxPrice],
+      priceRange: [minPrice, maxPrice], // Reset to current prop values
     });
     onSearch(allCars); 
   };
@@ -154,10 +159,10 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
                   <Slider
                     value={field.value}
                     onValueChange={field.onChange}
-                    min={minPrice}
-                    max={maxPrice}
-                    step={50000} // Adjusted step for INR
-                    minStepsBetweenThumbs={1}
+                    min={minPrice} // Use prop
+                    max={maxPrice} // Use prop
+                    step={50000} // Step for INR, e.g., 50k
+                    minStepsBetweenThumbs={0} // Allow thumbs to be at the same value
                     className="my-4"
                   />
                   <div className="text-sm text-muted-foreground flex justify-between">

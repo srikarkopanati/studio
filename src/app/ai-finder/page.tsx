@@ -15,16 +15,17 @@ import {
 } from '@/components/ui/select';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Loader2, Wand2, Car as CarIcon } from 'lucide-react';
+import { Loader2, Wand2, Car as CarIcon, Zap } from 'lucide-react'; // Added Zap for mileage
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { aiCarFinder, AICarFinderInput, AICarFinderOutput } from '@/ai/flows/ai-car-finder';
-import { budgetOptions, familySizeOptions, usageOptions } from '@/lib/types';
+import { budgetOptions, familySizeOptions, usageOptions, mileagePreferenceOptions } from '@/lib/types';
 import { toast } from '@/hooks/use-toast';
 
 const aiFinderSchema = z.object({
   budget: z.string().min(1, "Please select your budget."),
   familySize: z.string().min(1, "Please select your family size."),
   usage: z.string().min(1, "Please select your primary car usage."),
+  mileagePreference: z.string().min(1, "Please select your mileage preference."),
 });
 
 type AIFinderFormData = z.infer<typeof aiFinderSchema>;
@@ -35,16 +36,17 @@ interface ControllerSelectProps {
   placeholder: string;
   options: { value: string; label: string }[];
   error?: string;
+  Icon?: React.ElementType; // Optional icon for the label
 }
 
-function ControllerSelect({ name, control, placeholder, options, error }: ControllerSelectProps) {
+function ControllerSelect({ name, control, placeholder, options, error, Icon }: ControllerSelectProps) {
   return (
     <>
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <Select onValueChange={field.onChange} defaultValue={field.value || undefined}>
             <SelectTrigger id={name} className="w-full">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
@@ -69,10 +71,11 @@ export default function AiFinderPage() {
 
   const { handleSubmit, control, formState: { errors } } = useForm<AIFinderFormData>({
     resolver: zodResolver(aiFinderSchema),
-     defaultValues: { // Add default values to prevent uncontrolled to controlled warning
+     defaultValues: { 
       budget: '',
       familySize: '',
       usage: '',
+      mileagePreference: '',
     },
   });
 
@@ -105,8 +108,8 @@ export default function AiFinderPage() {
         subtitle="Let our intelligent assistant help you find the perfect car. Just answer a few questions about your needs and preferences."
       />
 
-      <div className="flex flex-col gap-8 md:gap-12"> {/* Changed from grid to flex-col for top-bottom layout */}
-        <Card className="shadow-xl w-full"> {/* Ensure card takes full width in flex-col */}
+      <div className="flex flex-col gap-8 md:gap-12">
+        <Card className="shadow-xl w-full">
           <CardHeader>
             <CardTitle className="text-2xl font-semibold text-primary flex items-center gap-2">
               <Wand2 className="w-6 h-6" />
@@ -130,6 +133,14 @@ export default function AiFinderPage() {
                 <Label htmlFor="usage">What's the primary use for the car?</Label>
                 <ControllerSelect name="usage" control={control} placeholder="Select primary usage" options={usageOptions} error={errors.usage?.message} />
               </div>
+              
+              <div>
+                <Label htmlFor="mileagePreference" className="flex items-center gap-1">
+                  <Zap className="w-4 h-4 text-primary" />
+                  What's your mileage preference (kmpl)?
+                </Label>
+                <ControllerSelect name="mileagePreference" control={control} placeholder="Select mileage preference" options={mileagePreferenceOptions} error={errors.mileagePreference?.message} />
+              </div>
 
               <Button type="submit" disabled={isLoading} className="w-full bg-primary hover:bg-primary/90">
                 {isLoading ? (
@@ -148,9 +159,9 @@ export default function AiFinderPage() {
           </CardContent>
         </Card>
 
-        {/* Results Area - will now stack below the preferences card */}
+        {/* Results Area - stacks below the preferences card */}
         {isLoading && (
-          <Card className="shadow-xl animate-pulse w-full"> {/* Ensure card takes full width */}
+          <Card className="shadow-xl animate-pulse w-full">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold text-primary flex items-center gap-2">
                 <CarIcon className="w-6 h-6" />
@@ -168,7 +179,7 @@ export default function AiFinderPage() {
         )}
 
         {!isLoading && results && (
-          <Card className="shadow-xl bg-card border-accent w-full"> {/* Ensure card takes full width */}
+          <Card className="shadow-xl bg-card border-accent w-full">
             <CardHeader>
               <CardTitle className="text-2xl font-semibold text-primary flex items-center gap-2">
                  <CarIcon className="w-6 h-6" />
@@ -199,7 +210,7 @@ export default function AiFinderPage() {
           </Card>
         )}
          {!isLoading && !results && (
-           <Card className="shadow-xl w-full min-h-[300px] flex flex-col items-center justify-center text-center bg-secondary/50"> {/* Ensure card takes full width and has some min-height */}
+           <Card className="shadow-xl w-full min-h-[300px] flex flex-col items-center justify-center text-center bg-card">
               <CardContent className="p-8">
                   <Wand2 className="w-16 h-16 text-primary mx-auto mb-4 opacity-50" />
                   <p className="text-lg text-muted-foreground">

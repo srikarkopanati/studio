@@ -1,3 +1,4 @@
+
 "use client"; // This page uses client-side state for filtering
 
 import { useState, useEffect, useMemo } from 'react';
@@ -11,18 +12,26 @@ import { Skeleton } from '@/components/ui/skeleton'; // For loading state
 export default function GalleryPage() {
   const [filteredCars, setFilteredCars] = useState<Car[]>([]);
   const [isLoading, setIsLoading] = useState(true);
-  const [pageMinPrice, setPageMinPrice] = useState(0);
-  const [pageMaxPrice, setPageMaxPrice] = useState(10000000); // Default max in INR
+  const [pageMinPrice, setPageMinPrice] = useState(500000); // Updated min price to 5,00,000 INR
+  const [pageMaxPrice, setPageMaxPrice] = useState(50000000); // Updated max price to 5,00,00,000 INR
 
   // Simulate API call / data loading
   useEffect(() => {
     // In a real app, you'd fetch this data
     setTimeout(() => {
       setFilteredCars(allCarsData);
+      // Update min/max based on actual data if needed, but keep defaults if data is outside this new range or empty.
       if (allCarsData.length > 0) {
         const prices = allCarsData.map(car => car.price);
-        setPageMinPrice(Math.min(...prices));
-        setPageMaxPrice(Math.max(...prices));
+        // Ensure the pageMinPrice and pageMaxPrice reflect the new default range,
+        // but can also adapt if the actual car data has an even wider range.
+        // For now, we'll stick to the fixed new defaults for the filter.
+        // setPageMinPrice(Math.min(...prices, 500000));
+        // setPageMaxPrice(Math.max(...prices, 50000000));
+      } else {
+        // If no car data, stick to the new defaults.
+        setPageMinPrice(500000);
+        setPageMaxPrice(50000000);
       }
       setIsLoading(false);
     }, 500); // Simulate network delay
@@ -50,8 +59,8 @@ export default function GalleryPage() {
           allCars={allCarsData}
           onSearch={handleSearch}
           uniqueMakes={uniqueMakes}
-          minPrice={pageMinPrice}
-          maxPrice={pageMaxPrice}
+          minPrice={pageMinPrice} // Use state variable
+          maxPrice={pageMaxPrice} // Use state variable
         />
       ) : (
         <CardSkeleton />
