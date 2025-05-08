@@ -40,6 +40,8 @@ interface ControllerSelectProps {
   label: string;
 }
 
+const EMPTY_STRING_VALUE_FOR_SELECT = "_EMPTY_"; // Special value for "Any" or "No Preference"
+
 function ControllerSelect({ name, control, placeholder, options, Icon, label }: ControllerSelectProps) {
   return (
     <div className="space-y-2">
@@ -51,13 +53,15 @@ function ControllerSelect({ name, control, placeholder, options, Icon, label }: 
         name={name}
         control={control}
         render={({ field }) => (
-          <Select onValueChange={field.onChange} value={field.value || ""} >
+          <Select 
+            onValueChange={(value) => field.onChange(value === EMPTY_STRING_VALUE_FOR_SELECT ? "" : value)} 
+            value={field.value === "" ? EMPTY_STRING_VALUE_FOR_SELECT : field.value}
+          >
             <SelectTrigger id={name} className="w-full">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
             <SelectContent>
-              {/* Removed explicit SelectItem for placeholder as SelectValue handles it and SelectItem value cannot be empty. */}
-              {/* <SelectItem value="">{placeholder}</SelectItem> */}
+              <SelectItem value={EMPTY_STRING_VALUE_FOR_SELECT}>{placeholder}</SelectItem>
               {options.map(option => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -120,8 +124,8 @@ export default function AiFinderPage() {
         subtitle="Let our intelligent assistant help you find the perfect car. Just answer a few questions about your needs and preferences. Leave fields blank if you have no specific preference."
       />
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 md:gap-12">
-        <Card className="shadow-xl lg:col-span-1 w-full">
+      <div className="flex flex-col gap-8 md:gap-12 items-center"> {/* Changed to flex-col */}
+        <Card className="shadow-xl w-full max-w-2xl"> {/* Added max-w-2xl for better form appearance */}
           <CardHeader>
             <CardTitle className="text-2xl font-semibold text-primary flex items-center gap-2">
               <Wand2 className="w-6 h-6" />
@@ -181,8 +185,8 @@ export default function AiFinderPage() {
           </CardContent>
         </Card>
 
-        {/* Results Area - takes up remaining space or full width on smaller screens */}
-        <div className="lg:col-span-2 w-full">
+        {/* Results Area - now below the form */}
+        <div className="w-full max-w-4xl"> {/* Added max-w-4xl for better results appearance */}
           {isLoading && (
             <Card className="shadow-xl animate-pulse w-full">
               <CardHeader>
