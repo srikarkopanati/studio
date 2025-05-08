@@ -8,7 +8,7 @@ export const cars: Car[] = [
     model: 'Camry',
     year: 2023,
     price: 2280000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=1',
+    imageUrl: 'Toyota Camry', // Search hint for Unsplash
     description: 'A reliable and fuel-efficient sedan, perfect for families and daily commutes.',
     features: ['Automatic', 'Sunroof', 'Lane Assist', 'Apple CarPlay'],
     mileage: 24000, // KMs
@@ -21,7 +21,7 @@ export const cars: Car[] = [
     model: 'CR-V',
     year: 2022,
     price: 2560000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=2',
+    imageUrl: 'Honda CRV', // Search hint for Unsplash
     description: 'Versatile SUV with ample space and advanced safety features.',
     features: ['AWD', 'Panoramic Roof', 'Heated Seats', 'Android Auto'],
     mileage: 35200, // KMs
@@ -34,7 +34,7 @@ export const cars: Car[] = [
     model: 'Mustang',
     year: 2024,
     price: 3600000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=3',
+    imageUrl: 'Ford Mustang', // Search hint for Unsplash
     description: 'Iconic American muscle car with thrilling performance and modern tech.',
     features: ['V8 Engine', 'Performance Exhaust', 'Leather Seats', 'Digital Dash'],
     mileage: 8000, // KMs
@@ -47,7 +47,7 @@ export const cars: Car[] = [
     model: 'Model 3',
     year: 2023,
     price: 3360000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=4',
+    imageUrl: 'Tesla Model 3', // Search hint for Unsplash
     description: 'Popular electric sedan with cutting-edge technology and impressive range.',
     features: ['Autopilot', 'Full Glass Roof', 'Premium Interior', 'Over-the-air updates'],
     mileage: 19200, // KMs
@@ -60,7 +60,7 @@ export const cars: Car[] = [
     model: 'X5',
     year: 2022,
     price: 5200000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=5',
+    imageUrl: 'BMW X5', // Search hint for Unsplash
     description: 'Luxury SUV offering a blend of comfort, performance, and technology.',
     features: ['xDrive AWD', 'Harman Kardon Sound', 'Heads-up Display', 'Gesture Control'],
     mileage: 28800, // KMs
@@ -73,7 +73,7 @@ export const cars: Car[] = [
     model: 'C-Class',
     year: 2023,
     price: 4160000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=6',
+    imageUrl: 'Mercedes Benz CClass', // Search hint for Unsplash
     description: 'Elegant and sophisticated sedan with a focus on luxury and refinement.',
     features: ['MBUX Infotainment', 'Ambient Lighting', 'Burmester Sound', 'Driver Assistance Package'],
     mileage: 14400, // KMs
@@ -86,7 +86,7 @@ export const cars: Car[] = [
     model: 'A4',
     year: 2023,
     price: 3440000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=7',
+    imageUrl: 'Audi A4', // Search hint for Unsplash
     description: 'A well-rounded compact luxury sedan with Quattro all-wheel drive.',
     features: ['Virtual Cockpit', 'Quattro AWD', 'Bang & Olufsen Sound', 'Matrix LED headlights'],
     mileage: 17600, // KMs
@@ -99,7 +99,7 @@ export const cars: Car[] = [
     model: 'Wrangler',
     year: 2024,
     price: 3840000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=8',
+    imageUrl: 'Jeep Wrangler', // Search hint for Unsplash
     description: 'Legendary off-road SUV capable of tackling any terrain.',
     features: ['4x4 System', 'Removable Top', 'Uconnect Infotainment', 'Trail Rated'],
     mileage: 4800, // KMs
@@ -112,7 +112,7 @@ export const cars: Car[] = [
     model: 'Outback',
     year: 2022,
     price: 2800000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=9',
+    imageUrl: 'Subaru Outback', // Search hint for Unsplash
     description: 'Rugged and capable wagon perfect for outdoor adventures.',
     features: ['Symmetrical AWD', 'EyeSight Driver Assist', 'Starlink Multimedia', 'Roof Rails'],
     mileage: 40000, // KMs
@@ -125,7 +125,7 @@ export const cars: Car[] = [
     model: 'Telluride',
     year: 2023,
     price: 3760000, // INR
-    imageUrl: 'https://picsum.photos/600/400?random=10',
+    imageUrl: 'Kia Telluride', // Search hint for Unsplash
     description: 'Award-winning 3-row SUV with a spacious interior and premium features.',
     features: ['3rd Row Seating', 'Nappa Leather', 'Dual Sunroofs', 'Highway Driving Assist'],
     mileage: 22400, // KMs
