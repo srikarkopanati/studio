@@ -51,12 +51,13 @@ function ControllerSelect({ name, control, placeholder, options, Icon, label }: 
         name={name}
         control={control}
         render={({ field }) => (
-          <Select onValueChange={field.onChange} value={field.value || ""} > {/* Ensure value is "" for placeholder */}
+          <Select onValueChange={field.onChange} value={field.value || ""} >
             <SelectTrigger id={name} className="w-full">
               <SelectValue placeholder={placeholder} />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">{placeholder}</SelectItem> 
+              {/* Removed explicit SelectItem for placeholder as SelectValue handles it and SelectItem value cannot be empty. */}
+              {/* <SelectItem value="">{placeholder}</SelectItem> */}
               {options.map(option => (
                 <SelectItem key={option.value} value={option.value}>
                   {option.label}
@@ -88,8 +89,6 @@ export default function AiFinderPage() {
     setIsLoading(true);
     setResults(null);
     try {
-      // Ensure empty strings are passed if a field is not selected.
-      // The controller with `value={field.value || ""}` and `placeholder` SelectItem handles this.
       const submissionData: AICarFinderInput = {
         budget: data.budget || "",
         familySize: data.familySize || "",
@@ -249,3 +248,4 @@ export default function AiFinderPage() {
     </div>
   );
 }
+
