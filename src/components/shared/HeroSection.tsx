@@ -1,3 +1,4 @@
+
 'use client';
 import type { ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
@@ -19,7 +20,7 @@ export function HeroSection({ title, subtitle, imageUrl, ctaText, ctaLink, child
         <div
           className="absolute inset-0 bg-cover bg-center opacity-20"
           style={{ backgroundImage: `url(${imageUrl})` }}
-          data-ai-hint="abstract car background"
+          data-ai-hint="abstract car"
         />
       )}
       <div className="container relative z-10 mx-auto px-4 text-center">

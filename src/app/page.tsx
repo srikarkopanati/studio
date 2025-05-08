@@ -1,3 +1,4 @@
+
 import { HeroSection } from '@/components/shared/HeroSection';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { CarList } from '@/components/cars/CarList';
@@ -36,7 +37,7 @@ export default function HomePage() {
         subtitle="Browse thousands of new and used cars, or let our AI guide you to the perfect match."
         ctaText="Explore Car Gallery"
         ctaLink="/gallery"
-        imageUrl="https://picsum.photos/1920/1080?random=100"
+        imageUrl="https://images.unsplash.com/photo-1494976388531-d1058494cdd8?w=1920&h=1080&fit=crop&q=80"
       />
 
       <section className="py-16 md:py-24 bg-secondary">
