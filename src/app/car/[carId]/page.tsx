@@ -40,10 +40,11 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     );
   }
 
-  // Use unsplash to find images based on make and model
   const mainImageSearchTerm = `${car.make} ${car.model}`;
-  const mainImageSrc = `https://source.unsplash.com/featured/?${encodeURIComponent(mainImageSearchTerm)}&w=1200&h=800`;
-  const mainImageSearchHint = `${car.make} ${car.model}`;
+  // Changed Unsplash URL from /featured/ to direct size & search term for potentially better reliability/relevance
+  const mainImageSrc = `https://source.unsplash.com/1200x800/?${encodeURIComponent(mainImageSearchTerm)}`;
+  // Simplified data-ai-hint to car model, often 1-2 keywords.
+  const mainImageSearchHint = car.model;
 
 
   return (
@@ -68,9 +69,9 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
               style={{ objectFit: 'cover' }}
               className="bg-muted"
               data-ai-hint={mainImageSearchHint} 
-              priority 
+              priority // Main image on details page can be priority
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
-              key={`${car.id}-details-image`} // Unique key for image
+              key={`${car.id}-details-image`}
             />
           </div>
         </CardHeader>
@@ -144,11 +145,11 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
                 <h3 className="text-xl font-semibold text-primary mb-3">More Images</h3>
                 <div className="grid grid-cols-2 gap-4">
                   {[...Array(2)].map((_, i) => {
-                    const moreImageSearchTerm = `${car.make} ${car.model} interior ${i+1}`; // Example: "Toyota Camry interior 1"
-                    const moreImageSrc = `https://source.unsplash.com/featured/?${encodeURIComponent(moreImageSearchTerm)}&w=400&h=300`;
+                    const moreImageSearchTerm = `${car.make} ${car.model} interior ${i+1}`; 
+                    const moreImageSrc = `https://source.unsplash.com/400x300/?${encodeURIComponent(moreImageSearchTerm)}`;
                     return (
                        <div key={i} className="relative aspect-video bg-muted rounded-md overflow-hidden">
-                         <Image src={moreImageSrc} alt={`More image ${i+1} of ${car.make} ${car.model}`} fill style={{objectFit: "cover"}} data-ai-hint={`${car.make} ${car.model} detail`} />
+                         <Image src={moreImageSrc} alt={`More image ${i+1} of ${car.make} ${car.model}`} fill style={{objectFit: "cover"}} data-ai-hint={`${car.model} interior`} />
                       </div>
                     );
                   })}
@@ -170,4 +171,3 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     </div>
   );
 }
-

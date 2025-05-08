@@ -11,10 +11,11 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  // Use unsplash to find images based on make and model
   const searchTerm = `${car.make} ${car.model}`;
-  const imageSrc = `https://source.unsplash.com/featured/?${encodeURIComponent(searchTerm)}&w=600&h=400`;
-  const imageSearchHint = `${car.make} ${car.model}`;
+  // Changed Unsplash URL from /featured/ to direct size & search term for potentially better reliability/relevance
+  const imageSrc = `https://source.unsplash.com/600x400/?${encodeURIComponent(searchTerm)}`;
+  // Simplified data-ai-hint to car model, often 1-2 keywords.
+  const imageSearchHint = car.model;
 
 
   return (
@@ -23,14 +24,14 @@ export function CarCard({ car }: CarCardProps) {
         <div className="relative w-full h-56">
           <Image
             src={imageSrc}
-            alt={`${car.make} ${car.model}`}
+            alt={`Image of ${car.make} ${car.model}`}
             fill
             style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105 bg-muted"
             data-ai-hint={imageSearchHint} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
-            priority={false}
-            key={`${car.id}-card-image`} // Unique key for image
+            priority={false} // Keep false for gallery items
+            key={`${car.id}-card-image`} 
           />
         </div>
       </CardHeader>
@@ -70,4 +71,3 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
-
