@@ -24,19 +24,19 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        <Link href="/" className="flex items-center gap-2" onClick={() => setIsMobileMenuOpen(false)}>
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
           <Car className="h-7 w-7 text-primary" />
-          <span className="text-xl font-bold text-primary">The Wheels Garage</span>
+          <span className="text-xl font-bold text-primary whitespace-nowrap">The Wheels Garage</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-6">
+        <nav className="hidden md:flex gap-4 items-center"> {/* Reduced gap from 6 to 4, added items-center */}
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary",
+                "text-sm font-medium transition-colors hover:text-primary whitespace-nowrap", // Added whitespace-nowrap
                 pathname === item.href ? "text-primary" : "text-muted-foreground"
               )}
             >
@@ -58,7 +58,7 @@ export function Header() {
               <div className="flex flex-col space-y-6">
                 <Link href="/" className="flex items-center gap-2 mb-4" onClick={() => setIsMobileMenuOpen(false)}>
                   <Car className="h-7 w-7 text-primary" />
-                  <span className="text-xl font-bold text-primary">The Wheels Garage</span>
+                  <span className="text-xl font-bold text-primary whitespace-nowrap">The Wheels Garage</span>
                 </Link>
                 {navItems.map((item) => (
                   <SheetClose key={item.href} asChild>
@@ -82,4 +82,3 @@ export function Header() {
     </header>
   );
 }
-

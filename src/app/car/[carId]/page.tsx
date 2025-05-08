@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { DollarSign, Gauge, Settings, Fuel, CalendarDays, ListChecks, ArrowLeft, ShieldCheck } from 'lucide-react';
+import { DollarSign, Gauge, Settings, Fuel, CalendarDays, ListChecks, ArrowLeft, ShieldCheck, Mail } from 'lucide-react';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -71,7 +71,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
         <CardHeader className="p-0">
           <div className="relative w-full h-72 md:h-96 lg:h-[500px]">
             <Image
-              src={car.imageUrl || `https://picsum.photos/seed/${car.id}-detail/1200/800`} // Fallback if imageUrl is somehow missing
+              src={car.imageUrl || `https://picsum.photos/seed/${car.id}-detail/1200/800`} 
               alt={`Image of ${car.make} ${car.model}`}
               fill
               style={{ objectFit: 'cover' }}
@@ -158,11 +158,19 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
           </div>
         </CardContent>
         <CardFooter className="p-6 md:p-8 border-t border-border bg-muted/30">
-           <Link href="/ai-finder" passHref>
-            <Button size="lg" className="bg-primary hover:bg-primary/90 text-primary-foreground">
-              Find Similar Cars with AI
-            </Button>
-          </Link>
+          <div className="flex flex-col sm:flex-row gap-4 w-full">
+            <Link href="/ai-finder" passHref className="flex-grow">
+              <Button size="lg" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
+                Find Similar Cars with AI
+              </Button>
+            </Link>
+            <Link href="/contact" passHref className="flex-grow">
+              <Button size="lg" variant="outline" className="w-full border-accent text-accent hover:bg-accent/10">
+                <Mail className="mr-2 h-5 w-5" />
+                Contact Us About This Car
+              </Button>
+            </Link>
+          </div>
         </CardFooter>
       </Card>
     </div>
