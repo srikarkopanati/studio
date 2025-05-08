@@ -40,10 +40,9 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     );
   }
 
-  const mainImageSearchTerm = `${car.make} ${car.model}`;
-  // Changed Unsplash URL from /featured/ to direct size & search term for potentially better reliability/relevance
-  const mainImageSrc = `https://source.unsplash.com/1200x800/?${encodeURIComponent(mainImageSearchTerm)}`;
-  // Simplified data-ai-hint to car model, often 1-2 keywords.
+  // Using Picsum for reliable placeholder images. Added car.id to query string for variety.
+  const mainImageSrc = `https://picsum.photos/1200/800?random=${car.id}`;
+  // data-ai-hint uses the car model, which is 1-2 keywords.
   const mainImageSearchHint = car.model;
 
 
@@ -139,24 +138,6 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
                   </div>
                 </div>
               </div>
-              {/* Placeholder for additional images or a gallery component 
-              <Separator />
-              <div>
-                <h3 className="text-xl font-semibold text-primary mb-3">More Images</h3>
-                <div className="grid grid-cols-2 gap-4">
-                  {[...Array(2)].map((_, i) => {
-                    const moreImageSearchTerm = `${car.make} ${car.model} interior ${i+1}`; 
-                    const moreImageSrc = `https://source.unsplash.com/400x300/?${encodeURIComponent(moreImageSearchTerm)}`;
-                    return (
-                       <div key={i} className="relative aspect-video bg-muted rounded-md overflow-hidden">
-                         <Image src={moreImageSrc} alt={`More image ${i+1} of ${car.make} ${car.model}`} fill style={{objectFit: "cover"}} data-ai-hint={`${car.model} interior`} />
-                      </div>
-                    );
-                  })}
-                </div>
-                 <p className="text-xs text-muted-foreground mt-2">Note: Image gallery feature can be expanded with actual car images.</p>
-              </div>
-              */}
             </div>
           </div>
         </CardContent>

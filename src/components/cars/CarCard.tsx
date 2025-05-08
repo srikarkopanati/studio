@@ -11,10 +11,9 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const searchTerm = `${car.make} ${car.model}`;
-  // Changed Unsplash URL from /featured/ to direct size & search term for potentially better reliability/relevance
-  const imageSrc = `https://source.unsplash.com/600x400/?${encodeURIComponent(searchTerm)}`;
-  // Simplified data-ai-hint to car model, often 1-2 keywords.
+  // Using Picsum for reliable placeholder images. Added car.id to query string for variety.
+  const imageSrc = `https://picsum.photos/600/400?random=${car.id}`;
+  // data-ai-hint uses the car model, which is 1-2 keywords as per guidelines.
   const imageSearchHint = car.model;
 
 
@@ -71,3 +70,4 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
+
