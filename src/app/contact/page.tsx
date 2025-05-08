@@ -13,7 +13,7 @@ export default function ContactPage() {
     phone: "7278768888",
     addressLine1: "THE WHEELS GARAGE",
     addressLine2: "PADMAVATHI NAGAR ARCH,",
-    addressLine3: "NANDYAL, KURNOOL DIST - 518501", // Corrected to standard address format
+    addressLine3: "NANDYAL, KURNOOL DIST - 518501",
     email: "contact@thewheelsgarage.com"
   };
 
@@ -29,10 +29,10 @@ export default function ContactPage() {
         subtitle="We're here to help and answer any question you might have. We look forward to hearing from you!"
       />
 
-      <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+      <div className="grid md:grid-cols-12 gap-8 md:gap-12 items-stretch"> {/* Changed items-start to items-stretch */}
         {/* Contact Information Column */}
-        <div className="md:col-span-5 lg:col-span-4 space-y-8">
-          <Card className="shadow-xl bg-card border border-border rounded-xl overflow-hidden">
+        <div className="md:col-span-5 lg:col-span-4 flex flex-col"> {/* Added flex flex-col */}
+          <Card className="shadow-xl bg-card border border-border rounded-xl overflow-hidden flex-grow flex flex-col h-full"> {/* Added flex-grow and h-full */}
             <CardHeader className="bg-primary text-primary-foreground p-6">
               <CardTitle className="text-2xl font-semibold flex items-center gap-3">
                 <Building className="w-7 h-7" />
@@ -42,7 +42,7 @@ export default function ContactPage() {
                 Reach out or visit us.
               </CardDescription>
             </CardHeader>
-            <CardContent className="p-6 space-y-5">
+            <CardContent className="p-6 space-y-5 flex-grow"> {/* Added flex-grow */}
               <div className="flex items-center gap-4">
                 <User className="w-6 h-6 text-accent flex-shrink-0" />
                 <div>
@@ -71,7 +71,7 @@ export default function ContactPage() {
                 </div>
               </div>
               <Separator />
-              <div className="flex items-start gap-4"> {/* Changed to items-start for address alignment */}
+              <div className="flex items-start gap-4">
                 <MapPin className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold text-foreground text-sm uppercase tracking-wider">Our Address</p>
@@ -86,7 +86,7 @@ export default function ContactPage() {
           </Card>
 
           {socialLinks.length > 0 && (
-             <Card className="shadow-xl bg-card border border-border rounded-xl">
+             <Card className="shadow-xl bg-card border border-border rounded-xl mt-8"> {/* Added mt-8 for spacing if social links exist */}
                 <CardHeader>
                     <CardTitle className="text-xl font-semibold text-primary">Connect With Us</CardTitle>
                 </CardHeader>
@@ -104,8 +104,8 @@ export default function ContactPage() {
         </div>
 
         {/* Map/Image Column */}
-        <div className="md:col-span-7 lg:col-span-8">
-          <Card className="shadow-xl overflow-hidden bg-card border border-border rounded-xl">
+        <div className="md:col-span-7 lg:col-span-8 flex flex-col"> {/* Added flex flex-col */}
+          <Card className="shadow-xl overflow-hidden bg-card border border-border rounded-xl flex-grow flex flex-col h-full"> {/* Added flex-grow and h-full */}
             <div className="relative w-full h-72 md:h-96 lg:h-[450px] bg-muted">
               <Image
                 src="https://picsum.photos/seed/garage-showroom-exterior/1200/800"
@@ -118,20 +118,22 @@ export default function ContactPage() {
                 className="rounded-t-xl"
               />
             </div>
-            <CardContent className="p-6 md:p-8">
-               <div className="flex items-center gap-3 mb-4">
-                  <Clock className="w-6 h-6 text-accent flex-shrink-0" />
-                  <div>
-                    <h3 className="text-xl font-semibold text-primary">Operating Hours</h3>
-                    <p className="text-muted-foreground">Monday - Saturday: 9:00 AM - 7:00 PM</p>
-                    <p className="text-muted-foreground">Sunday: Closed</p>
+            <CardContent className="p-6 md:p-8 flex-grow flex flex-col justify-between"> {/* Added flex-grow and flex structure */}
+               <div> {/* Content wrapper */}
+                <div className="flex items-center gap-3 mb-4">
+                    <Clock className="w-6 h-6 text-accent flex-shrink-0" />
+                    <div>
+                      <h3 className="text-xl font-semibold text-primary">Operating Hours</h3>
+                      <p className="text-muted-foreground">Monday - Saturday: 9:00 AM - 7:00 PM</p>
+                      <p className="text-muted-foreground">Sunday: Closed</p>
+                    </div>
                   </div>
-                </div>
-                <Separator className="my-6" />
-              <Button asChild size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base py-3 px-8 shadow-md">
-                <a 
-                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.addressLine1 + ", " + contactDetails.addressLine2 + " " + contactDetails.addressLine3)}`} 
-                  target="_blank" 
+                  <Separator className="my-6" />
+               </div>
+              <Button asChild size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base py-3 px-8 shadow-md mt-auto"> {/* Added mt-auto */}
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.addressLine1 + ", " + contactDetails.addressLine2 + " " + contactDetails.addressLine3)}`}
+                  target="_blank"
                   rel="noopener noreferrer"
                 >
                   <MapPin className="mr-2 h-5 w-5" />
