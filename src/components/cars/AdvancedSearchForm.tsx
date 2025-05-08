@@ -1,4 +1,3 @@
-
 "use client";
 
 import * as React from 'react';
@@ -47,22 +46,6 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
       priceRange: [minPrice, maxPrice], // Initialize with props
     },
   });
-
-  // Update form's priceRange default/reset values when minPrice/maxPrice props change
-  React.useEffect(() => {
-    // Only reset priceRange if the current form value is the old default or not yet set properly
-    const currentFormRange = watch("priceRange");
-    if (
-      !currentFormRange || // if not set
-      (currentFormRange[0] !== minPrice || currentFormRange[1] !== maxPrice) // or if different from new props
-    ) {
-      reset(currentValues => ({
-        ...currentValues, // keep other current form values
-        priceRange: [minPrice, maxPrice]
-      }));
-    }
-  }, [minPrice, maxPrice, reset, watch]);
-
 
   const onSubmit: SubmitHandler<SearchFormData> = (data) => {
     let filtered = [...allCars];
