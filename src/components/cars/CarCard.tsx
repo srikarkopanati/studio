@@ -14,7 +14,8 @@ export function CarCard({ car }: CarCardProps) {
   // car.imageUrl contains the search hint like "Toyota Camry"
   const imageSearchHint = car.imageUrl; 
   // Use picsum.photos for reliable placeholder images
-  const imageSrc = `https://picsum.photos/600/400`;
+  const imageSrc = `https://picsum.photos/seed/${encodeURIComponent(car.id)}/600/400`;
+
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card">
@@ -26,8 +27,10 @@ export function CarCard({ car }: CarCardProps) {
             fill
             style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105"
-            data-ai-hint={imageSearchHint} // Keep the specific car hint for AI replacement
+            data-ai-hint={imageSearchHint} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
+            priority={false} // Set to true for LCP images if applicable on a page
+            key={car.id} // Add key for better reconciliation if list reorders
           />
         </div>
       </CardHeader>
@@ -58,7 +61,7 @@ export function CarCard({ car }: CarCardProps) {
         <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{car.description}</p>
       </CardContent>
       <CardFooter className="p-6 pt-0">
-        <Link href={`/gallery?carId=${car.id}`} passHref className="w-full">
+        <Link href={`/car/${car.id}`} passHref className="w-full">
           <Button variant="default" className="w-full bg-primary hover:bg-primary/90">
             View Details
           </Button>
@@ -67,4 +70,3 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
-
