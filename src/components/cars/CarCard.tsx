@@ -32,7 +32,7 @@ export function CarCard({ car }: CarCardProps) {
         </div>
         <Badge 
           variant={car.condition === 'new' ? 'default' : 'secondary'} 
-          className={`absolute top-3 right-3 text-xs px-2 py-1 ${car.condition === 'new' ? 'bg-accent text-accent-foreground shadow-md' : 'bg-secondary text-secondary-foreground shadow-md'}`}
+          className={`absolute top-3 right-3 text-xs px-2 py-1 shadow-md ${car.condition === 'new' ? 'bg-accent text-accent-foreground' : 'bg-secondary text-secondary-foreground'}`}
         >
           {car.condition === 'new' ? 'New' : 'Used'}
         </Badge>
@@ -63,7 +63,7 @@ export function CarCard({ car }: CarCardProps) {
         </div>
         <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{car.description}</p>
       </CardContent>
-      <CardFooter className="p-6 pt-0 border-t border-border mt-auto bg-muted/30">
+      <CardFooter className="border-t border-border mt-auto bg-muted/30 p-4"> {/* Changed padding to p-4 for consistent spacing */}
         <Link href={`/car/${car.id}`} passHref className="w-full">
           <Button variant="default" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
             View Details
@@ -73,3 +73,4 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
+
