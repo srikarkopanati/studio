@@ -65,7 +65,7 @@ export default function ContactPage() {
                 <Mail className="w-6 h-6 text-accent flex-shrink-0" />
                 <div>
                   <p className="font-semibold text-foreground text-sm uppercase tracking-wider">Email Address</p>
-                  <a href={`mailto:${contactDetails.email}`} className="text-lg text-accent hover:underline hover:text-primary transition-colors break-all">
+                  <a href={`mailto:${contactDetails.email}`} className="text-base text-accent hover:underline hover:text-primary transition-colors break-words">
                     {contactDetails.email}
                   </a>
                 </div>
@@ -75,7 +75,7 @@ export default function ContactPage() {
                 <MapPin className="w-6 h-6 text-accent flex-shrink-0 mt-1" />
                 <div>
                   <p className="font-semibold text-foreground text-sm uppercase tracking-wider">Our Address</p>
-                  <address className="not-italic text-md text-muted-foreground space-y-0.5">
+                  <address className="not-italic text-base text-muted-foreground space-y-0.5">
                     <p>{contactDetails.addressLine1}</p>
                     <p>{contactDetails.addressLine2}</p>
                     <p>{contactDetails.addressLine3}</p>
@@ -118,7 +118,7 @@ export default function ContactPage() {
                 className="rounded-t-xl"
               />
             </div>
-            <CardContent className="p-6 md:p-8 flex-grow flex flex-col justify-between"> {/* Added flex-grow and flex structure */}
+            <CardContent className="p-6 md:p-8 flex-grow flex flex-col justify-between">
                <div> {/* Content wrapper */}
                 <div className="flex items-center gap-3 mb-4">
                     <Clock className="w-6 h-6 text-accent flex-shrink-0" />
@@ -130,7 +130,7 @@ export default function ContactPage() {
                   </div>
                   <Separator className="my-6" />
               </div>
-              <Button asChild size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base py-3 px-8 shadow-md mt-auto">
+              <Button asChild size="lg" className="w-full sm:w-auto bg-primary hover:bg-primary/90 text-primary-foreground text-base py-3 px-8 shadow-md mt-auto self-start">
                 <a
                   href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(contactDetails.addressLine1 + ", " + contactDetails.addressLine2 + " " + contactDetails.addressLine3)}`}
                   target="_blank"
