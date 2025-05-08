@@ -53,5 +53,3 @@ const aiCarFinderFlow = ai.defineFlow(
     return output!;
   }
 );
-
-```

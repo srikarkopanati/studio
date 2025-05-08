@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from 'react';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form'; 
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -38,7 +39,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
   const { register, handleSubmit, control, reset, watch, formState: { errors } } = useForm<SearchFormData>({
     resolver: zodResolver(searchSchema),
     defaultValues: {
-      make: '', 
+      make: ANY_MAKE_VALUE, 
       model: '',
       minYear: '',
       maxYear: '',
@@ -49,7 +50,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
   // Watch for changes in minPrice and maxPrice props to update form's default/reset values if needed
   React.useEffect(() => {
     reset({
-      make: watch('make') || '',
+      make: watch('make') || ANY_MAKE_VALUE,
       model: watch('model') || '',
       minYear: watch('minYear') || '',
       maxYear: watch('maxYear') || '',
@@ -61,7 +62,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
   const onSubmit: SubmitHandler<SearchFormData> = (data) => {
     let filtered = [...allCars];
 
-    if (data.make) { 
+    if (data.make && data.make !== ANY_MAKE_VALUE) { 
       filtered = filtered.filter(car => car.make.toLowerCase() === data.make?.toLowerCase());
     }
     if (data.model) {
@@ -81,7 +82,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
 
   const handleReset = () => {
     reset({
-      make: '',
+      make: ANY_MAKE_VALUE,
       model: '',
       minYear: '',
       maxYear: '',
@@ -109,8 +110,8 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
               control={control}
               render={({ field }) => (
                 <Select
-                  onValueChange={(value) => field.onChange(value === ANY_MAKE_VALUE ? "" : value)}
-                  value={field.value === "" ? ANY_MAKE_VALUE : field.value || ANY_MAKE_VALUE}
+                  onValueChange={(value) => field.onChange(value)}
+                  value={field.value || ANY_MAKE_VALUE}
                 >
                   <SelectTrigger id="make-select" className="w-full">
                     <SelectValue placeholder="Any Make" />
@@ -144,7 +145,7 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
           </div>
           
           <div className="space-y-2 md:col-span-2 lg:col-span-1">
-            <Label>Price Range</Label>
+            <Label>Price Range (₹)</Label>
             <Controller
               name="priceRange"
               control={control}
@@ -181,5 +182,3 @@ export function AdvancedSearchForm({ allCars, onSearch, uniqueMakes, minPrice, m
     </Card>
   );
 }
-
-```

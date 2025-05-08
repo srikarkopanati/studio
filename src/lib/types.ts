@@ -1,3 +1,4 @@
+
 export interface Car {
   id: string;
   make: string;
@@ -36,5 +37,3 @@ export const usageOptions = [
   { value: "performance / weekend drives", label: "Performance / Weekend Drives" },
   { value: "business / professional use", label: "Business / Professional Use" },
 ];
-
-```
