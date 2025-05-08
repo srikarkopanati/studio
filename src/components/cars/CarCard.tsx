@@ -3,7 +3,7 @@ import type { Car } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { DollarSign, CalendarDays, Gauge, Settings, Fuel } from 'lucide-react'; 
+import { DollarSign, Gauge, Settings, Fuel } from 'lucide-react'; 
 import Link from 'next/link';
 
 interface CarCardProps {
@@ -11,9 +11,10 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  const imageSearchHint = car.imageUrl;
-  // Ensure the search hint is properly encoded for URL usage
-  const imageSrc = `https://source.unsplash.com/600x400/?${encodeURIComponent(imageSearchHint.replace(/\s+/g, '+'))}`;
+  // car.imageUrl contains the search hint like "Toyota Camry"
+  const imageSearchHint = car.imageUrl; 
+  // Use picsum.photos for reliable placeholder images
+  const imageSrc = `https://picsum.photos/600/400`;
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card">
@@ -25,8 +26,8 @@ export function CarCard({ car }: CarCardProps) {
             fill
             style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105"
-            data-ai-hint={imageSearchHint}
-            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw" // General sizes, adjust if needed based on precise layout
+            data-ai-hint={imageSearchHint} // Keep the specific car hint for AI replacement
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
           />
         </div>
       </CardHeader>
@@ -66,3 +67,4 @@ export function CarCard({ car }: CarCardProps) {
     </Card>
   );
 }
+
