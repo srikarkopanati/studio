@@ -24,7 +24,7 @@ export function CarCard({ car }: CarCardProps) {
       <CardHeader className="p-0 relative">
         <div className="relative w-full h-56">
           <Image
-            src={car.imageUrl || `https://picsum.photos/seed/${car.id}/600/400`}
+            src={car.imageUrl || `https://picsum.photos/seed/${car.id}/600/400`} // Fallback if imageUrl is somehow missing
             alt={`Image of ${car.make} ${car.model}`}
             fill
             style={{ objectFit: 'cover' }}

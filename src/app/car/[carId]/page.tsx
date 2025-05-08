@@ -71,7 +71,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
         <CardHeader className="p-0">
           <div className="relative w-full h-72 md:h-96 lg:h-[500px]">
             <Image
-              src={car.imageUrl || `https://picsum.photos/seed/${car.id}-detail/1200/800`}
+              src={car.imageUrl || `https://picsum.photos/seed/${car.id}-detail/1200/800`} // Fallback if imageUrl is somehow missing
               alt={`Image of ${car.make} ${car.model}`}
               fill
               style={{ objectFit: 'cover' }}
