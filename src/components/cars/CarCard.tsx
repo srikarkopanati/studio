@@ -3,7 +3,7 @@ import type { Car } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { DollarSign, CalendarDays, Gauge, Settings, Fuel } from 'lucide-react'; // Removed Tag as it's not used
+import { DollarSign, CalendarDays, Gauge, Settings, Fuel } from 'lucide-react'; 
 import Link from 'next/link';
 
 interface CarCardProps {
@@ -11,21 +11,22 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  // car.imageUrl is now the search hint, e.g., "Toyota Camry"
   const imageSearchHint = car.imageUrl;
-  const imageSrc = `https://source.unsplash.com/600x400/?${encodeURIComponent(imageSearchHint)}`;
+  // Ensure the search hint is properly encoded for URL usage
+  const imageSrc = `https://source.unsplash.com/600x400/?${encodeURIComponent(imageSearchHint.replace(/\s+/g, '+'))}`;
 
   return (
-    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group">
+    <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card">
       <CardHeader className="p-0">
         <div className="relative w-full h-56">
           <Image
             src={imageSrc}
             alt={`${car.make} ${car.model}`}
-            layout="fill"
-            objectFit="cover"
+            fill
+            style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105"
-            data-ai-hint={imageSearchHint} // Use the search hint for data-ai-hint
+            data-ai-hint={imageSearchHint}
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw" // General sizes, adjust if needed based on precise layout
           />
         </div>
       </CardHeader>
@@ -56,7 +57,6 @@ export function CarCard({ car }: CarCardProps) {
         <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{car.description}</p>
       </CardContent>
       <CardFooter className="p-6 pt-0">
-        {/* In a real app, this link would go to a detailed car page e.g. /cars/${car.id} */}
         <Link href={`/gallery?carId=${car.id}`} passHref className="w-full">
           <Button variant="default" className="w-full bg-primary hover:bg-primary/90">
             View Details
