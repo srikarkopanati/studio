@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
-import { DollarSign, Gauge, Settings, Fuel, CalendarDays, ListChecks, ArrowLeft, ShieldCheck, Mail } from 'lucide-react';
+import { DollarSign, Gauge, Settings, Fuel, CalendarDays, ListChecks, ArrowLeft, ShieldCheck, Mail, Car as CarIconLucide } from 'lucide-react';
 import { SectionTitle } from '@/components/shared/SectionTitle';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
@@ -40,18 +40,15 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
     );
   }
 
-  // Generate a concise AI hint, prioritizing model name, then make and model if short enough.
-  let mainImageSearchHint = car.model;
-  if (`${car.make} ${car.model}`.split(' ').length <= 2) {
-    mainImageSearchHint = `${car.make} ${car.model}`;
-  }
+  const mainImageSearchHint = `${car.make.toLowerCase()} ${car.model.toLowerCase()}`.split(' ').slice(0, 2).join(' ');
+  const imageSeed = car.model.replace(/\s+/g, '') + car.make.replace(/\s+/g, '');
 
 
   return (
     <div className="container mx-auto px-4 py-12">
       <div className="mb-8">
         <Link href="/gallery" passHref>
-          <Button variant="outline" className="mb-8 border-primary text-primary hover:bg-primary/5">
+          <Button variant="outline" className="mb-8 border-primary text-primary hover:bg-primary/5 hover:text-primary-foreground">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Gallery
           </Button>
@@ -60,7 +57,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
             <SectionTitle title={`${car.make} ${car.model}`} subtitle={`Details for ${car.year} ${car.make} ${car.model}`} />
             <Badge 
                 variant={car.condition === 'new' ? 'default' : 'secondary'}
-                className={`text-lg px-4 py-2 mb-4 sm:mb-0 ${car.condition === 'new' ? 'bg-accent text-accent-foreground' : 'bg-secondary text-secondary-foreground'}`}
+                className={`text-lg px-4 py-2 mb-4 sm:mb-0 shadow-md ${car.condition === 'new' ? 'bg-accent text-accent-foreground' : 'bg-secondary text-secondary-foreground'}`}
             >
                 {car.condition === 'new' ? 'Brand New' : 'Pre-Owned'}
             </Badge>
@@ -71,12 +68,12 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
         <CardHeader className="p-0">
           <div className="relative w-full h-72 md:h-96 lg:h-[500px]">
             <Image
-              src={car.imageUrl || `https://picsum.photos/seed/${car.id}-detail/1200/800`} 
+              src={car.imageUrl || `https://picsum.photos/seed/${imageSeed}/1200/800`} 
               alt={`Image of ${car.make} ${car.model}`}
               fill
               style={{ objectFit: 'cover' }}
               className="bg-muted"
-              data-ai-hint={mainImageSearchHint.toLowerCase()} 
+              data-ai-hint={mainImageSearchHint} 
               priority 
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
               key={`${car.id}-details-image`}
@@ -87,7 +84,10 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2 space-y-6">
               <div>
-                <h2 className="text-2xl font-semibold text-primary mb-2">Description</h2>
+                <h2 className="text-2xl font-semibold text-primary mb-2 flex items-center">
+                    <CarIconLucide className="mr-3 h-6 w-6 text-accent" />
+                    Vehicle Overview
+                </h2>
                 <p className="text-muted-foreground leading-relaxed">{car.description}</p>
               </div>
               
@@ -100,7 +100,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
                 </h3>
                 <div className="flex flex-wrap gap-2">
                   {car.features.map((feature, index) => (
-                    <Badge key={index} variant="secondary" className="text-sm px-3 py-1 bg-secondary/70 text-secondary-foreground">
+                    <Badge key={index} variant="outline" className="text-sm px-3 py-1 bg-secondary/50 text-secondary-foreground border-primary/50">
                       {feature}
                     </Badge>
                   ))}
@@ -165,7 +165,7 @@ export default function CarDetailsPage({ params }: CarDetailsPageProps) {
               </Button>
             </Link>
             <Link href="/contact" passHref className="flex-grow">
-              <Button size="lg" variant="outline" className="w-full border-accent text-accent hover:bg-accent/10">
+              <Button size="lg" variant="outline" className="w-full border-accent text-accent hover:bg-accent/10 hover:text-accent-foreground">
                 <Mail className="mr-2 h-5 w-5" />
                 Contact Us About This Car
               </Button>

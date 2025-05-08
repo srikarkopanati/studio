@@ -12,24 +12,19 @@ interface CarCardProps {
 }
 
 export function CarCard({ car }: CarCardProps) {
-  // Generate a concise AI hint, prioritizing model name, then make and model if short enough.
-  let imageSearchHint = car.model;
-  if (`${car.make} ${car.model}`.split(' ').length <= 2) {
-    imageSearchHint = `${car.make} ${car.model}`;
-  }
-
+  const imageSearchHint = `${car.make.toLowerCase()} ${car.model.toLowerCase()}`.split(' ').slice(0, 2).join(' ');
 
   return (
     <Card className="overflow-hidden shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col h-full group bg-card border border-border rounded-xl">
       <CardHeader className="p-0 relative">
         <div className="relative w-full h-56">
           <Image
-            src={car.imageUrl || `https://picsum.photos/seed/${car.id}/600/400`} // Fallback if imageUrl is somehow missing
+            src={car.imageUrl || `https://picsum.photos/seed/${car.id}/800/600`} 
             alt={`Image of ${car.make} ${car.model}`}
             fill
             style={{ objectFit: 'cover' }}
             className="transition-transform duration-300 group-hover:scale-105 bg-muted"
-            data-ai-hint={imageSearchHint.toLowerCase()} 
+            data-ai-hint={imageSearchHint} 
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 30vw"
             priority={false} 
             key={`${car.id}-card-image`} 
@@ -37,7 +32,7 @@ export function CarCard({ car }: CarCardProps) {
         </div>
         <Badge 
           variant={car.condition === 'new' ? 'default' : 'secondary'} 
-          className={`absolute top-3 right-3 text-xs px-2 py-1 ${car.condition === 'new' ? 'bg-accent text-accent-foreground' : 'bg-secondary text-secondary-foreground'}`}
+          className={`absolute top-3 right-3 text-xs px-2 py-1 ${car.condition === 'new' ? 'bg-accent text-accent-foreground shadow-md' : 'bg-secondary text-secondary-foreground shadow-md'}`}
         >
           {car.condition === 'new' ? 'New' : 'Used'}
         </Badge>
@@ -68,7 +63,7 @@ export function CarCard({ car }: CarCardProps) {
         </div>
         <p className="mt-4 text-sm text-muted-foreground line-clamp-3">{car.description}</p>
       </CardContent>
-      <CardFooter className="p-6 pt-0 border-t border-border mt-auto">
+      <CardFooter className="p-6 pt-0 border-t border-border mt-auto bg-muted/30">
         <Link href={`/car/${car.id}`} passHref className="w-full">
           <Button variant="default" className="w-full bg-primary hover:bg-primary/90 text-primary-foreground">
             View Details

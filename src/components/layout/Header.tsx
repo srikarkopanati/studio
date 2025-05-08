@@ -1,4 +1,3 @@
-
 // src/components/layout/Header.tsx
 "use client";
 
@@ -24,20 +23,20 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container flex h-16 max-w-screen-2xl items-center justify-between">
-        <Link href="/" className="flex items-center gap-2 flex-shrink-0" onClick={() => setIsMobileMenuOpen(false)}>
+        <Link href="/" className="flex items-center gap-2 flex-shrink-0 mr-4" onClick={() => setIsMobileMenuOpen(false)}>
           <Car className="h-7 w-7 text-primary" />
           <span className="text-xl font-bold text-primary whitespace-nowrap">The Wheels Garage</span>
         </Link>
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex gap-4 items-center"> {/* Reduced gap from 6 to 4, added items-center */}
+        <nav className="hidden md:flex gap-3 items-center"> {/* Reduced gap from 4 to 3 */}
           {navItems.map((item) => (
             <Link
               key={item.href}
               href={item.href}
               className={cn(
-                "text-sm font-medium transition-colors hover:text-primary whitespace-nowrap", // Added whitespace-nowrap
-                pathname === item.href ? "text-primary" : "text-muted-foreground"
+                "text-sm font-medium transition-colors hover:text-primary whitespace-nowrap px-2 py-1 rounded-md", // Added padding for better click targets and visual separation
+                pathname === item.href ? "text-primary bg-primary/10" : "text-muted-foreground hover:bg-accent/10"
               )}
             >
               {item.label}
@@ -65,7 +64,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       className={cn(
-                        "text-lg font-medium transition-colors hover:text-primary",
+                        "text-lg font-medium transition-colors hover:text-primary py-2", // Increased vertical padding
                         pathname === item.href ? "text-primary" : "text-foreground"
                       )}
                       onClick={() => setIsMobileMenuOpen(false)}
